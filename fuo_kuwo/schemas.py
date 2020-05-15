@@ -15,6 +15,7 @@ class KuwoSongSchema(Schema):
     title = fields.Str(data_key='name', required=True)
     artist = fields.Str(data_key='artist', required=True)
     album = fields.Str(data_key='album', required=True)
+    albumpic = fields.Str(data_key='albumpic', required=True)
     lossless = fields.Bool(data_key='hasLossless', required=False)
 
     @post_load
