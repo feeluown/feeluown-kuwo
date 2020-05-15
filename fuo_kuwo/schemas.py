@@ -15,7 +15,7 @@ class KuwoSongSchema(Schema):
     title = fields.Str(data_key='name', required=True)
     artist = fields.Str(data_key='artist', required=True)
     album = fields.Str(data_key='album', required=True)
-    albumpic = fields.Str(data_key='albumpic', required=True)
+    albumpic = fields.Str(data_key='albumpic', required=False)
     lossless = fields.Bool(data_key='hasLossless', required=False)
 
     @post_load
@@ -24,8 +24,8 @@ class KuwoSongSchema(Schema):
                              duration=data.get('duration') * 1000,
                              title=data.get('title'),
                              artists=[KuwoArtistModel(name=data.get('artist'))],
-                             album=KuwoAlbumModel(name=data.get('album'), cover=data.get('albumpic')),
-                             lossless=data.get('lossless'))
+                             album=KuwoAlbumModel(name=data.get('album'), cover=data.get('albumpic', '')),
+                             lossless=data.get('lossless', False))
 
 
 from .models import KuwoSongModel, KuwoArtistModel, KuwoAlbumModel
