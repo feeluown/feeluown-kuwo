@@ -28,12 +28,7 @@ class KuwoBaseModel(BaseModel):
 
 class KuwoSongModel(SongModel, KuwoBaseModel):
     _url: str
-    _media: dict = {
-        'shq': (None, 0),
-        'sq': (None, 0),
-        'hq': (None, 0),
-        'lq': (None, 0)
-    }
+    _media: dict = {}
     _expired_at: int
 
     class Meta:
@@ -71,8 +66,9 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         logger.info(quality)
         if quality != 'shq':
             return self.get(self.identifier)
-        if self._media.get(quality)[0] is not None and self._media.get(quality)[1] > time.time():
-            return self._media.get(quality)[0]
+        if self._media.get(str(self.identifier)) and self._media.get(str(self.identifier)).get(quality)[0] is not None \
+                and self._media.get(str(self.identifier)).get(quality)[1] > time.time():
+            return self._media.get(str(self.identifier)).get(quality)[0]
         data = self._api.get_song_url_mobi(self.identifier, quality)
         logger.info(data)
         for d in data.split():
@@ -81,7 +77,8 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
                 media = Media(d.split('=')[-1],
                               format=KuwoApi.FORMATS_BRS[quality],
                               bitrate=KuwoApi.FORMATS_RATES[quality] // 1000)
-                self._media[quality] = (media, int(time.time()) + 60 * 10)
+                self._media[str(self.identifier)] = {}
+                self._media[str(self.identifier)][quality] = (media, int(time.time()) + 60 * 10)
                 return media or None
         return None
 
