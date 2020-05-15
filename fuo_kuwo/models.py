@@ -65,7 +65,9 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
     def get_media(self, quality):
         logger.info(quality)
         if quality != 'shq':
-            return self.get(self.identifier)
+            return Media(self.url,
+                         format=KuwoApi.FORMATS_BRS[quality],
+                         bitrate=KuwoApi.FORMATS_RATES[quality] // 1000)
         if self._media.get(str(self.identifier)) and self._media.get(str(self.identifier)).get(quality)[0] is not None \
                 and self._media.get(str(self.identifier)).get(quality)[1] > time.time():
             return self._media.get(str(self.identifier)).get(quality)[0]

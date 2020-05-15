@@ -91,6 +91,7 @@ class KuwoApi(object, metaclass=Singleton):
             return data
 
     def get_song_url_mobi(self, rid, quality):
+        logger.info('Querying lossless: {} ({})'.format(rid, quality))
         payload = 'corp=kuwo&p2p=1&type=convert_url2&sig=0&format=flac|mp3|aac&rid={}'\
             .format(rid)
         uri = KuwoApi.MOBI_HOST + '/mobi.s?f=kuwo&q=' + base64_encrypt(payload)
