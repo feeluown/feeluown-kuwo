@@ -5,3 +5,8 @@
 
 ## Development with pipenv
 `pipenv install` to create venv and start development.
+
+## Run tests
+`pytest -v`
+
+test_kuwo_api.py -- Kuwo API tests
