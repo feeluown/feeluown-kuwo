@@ -1,6 +1,6 @@
 from setuptools import setup
 
-from .fuo_kuwo import __version__
+from fuo_kuwo import __version__
 
 setup(
     name='feeluown_kuwo',
@@ -24,6 +24,7 @@ setup(
     install_requires=[
         'feeluown>=3.1',
         'requests',
+        'marshmallow'
     ],
     entry_points={
         'fuo.plugins_v1': [

@@ -7,9 +7,7 @@ __identifier__ = 'kuwo'
 
 from feeluown.app import App
 
-from fuo_kuwo.provider import KuwoProvider
-
-provider = KuwoProvider()
+from .provider import provider
 
 
 def enable(app: App):

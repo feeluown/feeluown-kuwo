@@ -9,6 +9,8 @@ logger = logging.getLogger(__name__)
 
 
 class KuwoProvider(AbstractProvider):
+    api: KuwoApi
+
     def __init__(self):
         super().__init__()
         self.api = KuwoApi()
@@ -20,3 +22,9 @@ class KuwoProvider(AbstractProvider):
     @property
     def identifier(self) -> str:
         return __identifier__
+
+
+provider = KuwoProvider()
+
+from .models import search
+provider.search = search

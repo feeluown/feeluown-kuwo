@@ -1,0 +1,51 @@
+{
+  "code": 200,
+  "curTime": 1589521379782,
+  "data": {
+    "musicrid": "MUSIC_6910877",
+    "artist": "OMFG",
+    "mvpayinfo": {
+      "play": 0,
+      "vid": 0,
+      "down": 0
+    },
+    "nationid": "0",
+    "pic": "http://img2.kuwo.cn/star/albumcover/300/17/31/183177141.jpg",
+    "isstar": 0,
+    "rid": 6910877,
+    "upPcStr": "kuwo://play/?play=MQ==&num=MQ==&musicrid0=TVVTSUNfNjkxMDg3Nw==&name0=SGVsbG8=&artist0=T01GRw==&album0=SGVsbG8=&artistid0=MjI5MjQ5&albumid0=MTYwMzI2NQ==&playsource=d2ViwK3G8L/Nu6e2yy0+MjAxNrDmtaXH+tKz",
+    "duration": 226,
+    "content_type": "0",
+    "mvPlayCnt": 19072,
+    "track": 1,
+    "hasLossless": true,
+    "hasmv": 1,
+    "releaseDate": "2014-12-03",
+    "album": "Hello",
+    "albumid": 1603265,
+    "pay": "16515324",
+    "artistid": 229249,
+    "albumpic": "http://img2.kuwo.cn/star/albumcover/500/17/31/183177141.jpg",
+    "songTimeMinutes": "03:46",
+    "isListenFee": false,
+    "mvUpPcStr": "kuwo://play/?play=MQ==&num=MQ==&musicrid0=TVVTSUNfNjkxMDg3Nw==&name0=SGVsbG8=&artist0=T01GRw==&album0=SGVsbG8=&artistid0=MjI5MjQ5&albumid0=MTYwMzI2NQ==&playsource=d2ViwK3G8L/Nu6e2yy0+MjAxNrDmtaXH+tKz&media=bXY=&mvid0=MA==&mvinfo_play0=MA==&mvinfo_download0=MA==",
+    "pic120": "http://img2.kuwo.cn/star/albumcover/120/17/31/183177141.jpg",
+    "albuminfo": "暂无",
+    "name": "Hello",
+    "online": 1,
+    "payInfo": {
+      "play": "1100",
+      "download": "1111",
+      "cannotDownload": 0,
+      "cannotOnlinePlay": 0,
+      "feeType": {
+        "song": "1",
+        "vip": "1"
+      },
+      "down": "1111"
+    }
+  },
+  "msg": "success",
+  "profileId": "site",
+  "reqId": "8180ff0f563bbe4864f72de0ba87fb23"
+}
