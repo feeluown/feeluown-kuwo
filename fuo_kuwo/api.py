@@ -2,6 +2,8 @@ import logging
 
 import requests
 from requests.cookies import RequestsCookieJar
+from .DES import base64_encrypt
+
 
 logger = logging.getLogger(__name__)
 
@@ -18,8 +20,31 @@ class Singleton(type):
 class KuwoApi(object, metaclass=Singleton):
     API_BASE: str = 'http://www.kuwo.cn/api/www'
     HTTP_HOST: str = 'http://kuwo.cn'
+    MOBI_HOST: str = 'http://mobi.kuwo.cn'
+    SEARCH_HOST: str = 'http://search.kuwo.cn'
     token: str
     cookie: RequestsCookieJar
+
+    FORMATS_RATES = {
+        'shq': 2000000,
+        'hq': 320000,
+        'sq': 192000,
+        'lq': 128000
+    }
+
+    FORMATS_BRS = {
+        'shq': '2000kflac',
+        'hq': '320kmp3',
+        'sq': '192kmp3',
+        'lq': '128kmp3'
+    }
+
+    FORMATS = {
+        'shq': 'AL',
+        'hq': 'MP3H',
+        'sq': 'MP3192',
+        'lq': 'MP3128'
+    }
 
     def __init__(self):
         self.timeout = 30
@@ -64,3 +89,11 @@ class KuwoApi(object, metaclass=Singleton):
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
             data = response.json()
             return data
+
+    def get_song_url_mobi(self, rid, quality):
+        payload = 'corp=kuwo&p2p=1&type=convert_url2&sig=0&format=flac|mp3|aac&rid={}'\
+            .format(rid)
+        uri = KuwoApi.MOBI_HOST + '/mobi.s?f=kuwo&q=' + base64_encrypt(payload)
+        with requests.Session() as session:
+            response = session.get(uri, headers={'User-Agent': 'okhttp/3.10.0'})
+            return response.text

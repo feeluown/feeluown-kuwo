@@ -1,6 +1,7 @@
 import logging
 import time
 
+from fuocore.media import Media
 from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel
 
 from .api import KuwoApi
@@ -27,11 +28,18 @@ class KuwoBaseModel(BaseModel):
 
 class KuwoSongModel(SongModel, KuwoBaseModel):
     _url: str
+    _media: dict = {
+        'shq': (None, 0),
+        'sq': (None, 0),
+        'hq': (None, 0),
+        'lq': (None, 0)
+    }
     _expired_at: int
 
     class Meta:
         allow_get = True
-        fields = ['rid']
+        fields = ['rid', 'lossless']
+        support_multi_quality = True
 
     @classmethod
     def get(cls, identifier):
@@ -51,6 +59,31 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
     def url(self, url):
         self._expired_at = int(time.time()) + 60 * 10
         self._url = url
+
+    def list_quality(self):
+        formats = ['shq', 'lq']
+        if not self.lossless:
+            formats.remove('shq')
+        logger.info(formats)
+        return formats
+
+    def get_media(self, quality):
+        logger.info(quality)
+        if quality != 'shq':
+            return self.get(self.identifier)
+        if self._media.get(quality)[0] is not None and self._media.get(quality)[1] > time.time():
+            return self._media.get(quality)[0]
+        data = self._api.get_song_url_mobi(self.identifier, quality)
+        logger.info(data)
+        for d in data.split():
+            if 'url' in d:
+                logger.info(d)
+                media = Media(d.split('=')[-1],
+                              format=KuwoApi.FORMATS_BRS[quality],
+                              bitrate=KuwoApi.FORMATS_RATES[quality] // 1000)
+                self._media[quality] = (media, int(time.time()) + 60 * 10)
+                return media or None
+        return None
 
 
 class KuwoArtistModel(ArtistModel, KuwoBaseModel):

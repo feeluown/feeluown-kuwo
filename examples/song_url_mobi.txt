@@ -1,0 +1,4 @@
+format=flac
+bitrate=2000
+url=http://eo.sycdn.kuwo.cn/91b3c1ed58f4046aa7fc0f8995ab7f6b/5ebe612c/resource/s1/18/60/1816646012.flac
+sig=7802435212922719570
