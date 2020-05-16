@@ -19,6 +19,7 @@ class KuwoSongSchema(Schema):
     albumid = fields.Int(data_key='albumid', required=False)
     albumpic = fields.Str(data_key='albumpic', required=False)
     lossless = fields.Bool(data_key='hasLossless', required=False)
+    hasmv = fields.Int(data_key='hasmv', required=False)
 
     @post_load
     def create_model(self, data, **kwargs):
@@ -31,7 +32,8 @@ class KuwoSongSchema(Schema):
                              title=data.get('title'),
                              artists=artists,
                              album=album,
-                             lossless=data.get('lossless', False))
+                             lossless=data.get('lossless', False),
+                             hasmv=data.get('hasmv', 0))
 
 
 class KuwoAlbumSchema(Schema):

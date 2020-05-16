@@ -41,7 +41,7 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
 
     class Meta:
         allow_get = True
-        fields = ['lossless']
+        fields = ['lossless', 'hasmv']
         support_multi_quality = True
 
     def __init__(self, *args, **kwargs):
@@ -68,6 +68,8 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
 
     @property
     def mv(self):
+        if self.hasmv != 1:
+            return None
         return KuwoMvModel(name=self.title, desc='', cover=self.album.cover or '', artist=self.artists_name,
                            media=self._api.get_song_mv(self.identifier) or '')
 
