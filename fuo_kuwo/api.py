@@ -21,6 +21,7 @@ class KuwoApi(object, metaclass=Singleton):
     API_BASE: str = 'http://www.kuwo.cn/api/www'
     HTTP_HOST: str = 'http://kuwo.cn'
     MOBI_HOST: str = 'http://mobi.kuwo.cn'
+    M_HOST: str = 'http://m.kuwo.cn'
     SEARCH_HOST: str = 'http://search.kuwo.cn'
     token: str
     cookie: RequestsCookieJar
@@ -113,7 +114,7 @@ class KuwoApi(object, metaclass=Singleton):
             return response.text
 
     def get_song_lyrics(self, rid: int):
-        uri = KuwoApi.MOBI_HOST + f'/newh5/singles/songinfoandlrc?musicId={rid}'
+        uri = KuwoApi.M_HOST + f'/newh5/singles/songinfoandlrc?musicId={rid}'
         with requests.Session() as session:
-            response = session.get(uri, headers=self.mobi_headers)
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
             return response.json()
