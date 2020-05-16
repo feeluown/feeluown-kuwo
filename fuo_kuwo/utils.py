@@ -1,4 +1,4 @@
-def _parse_lrc_time(time) -> str:
+def parse_lrc_time(time) -> str:
     time = float(time)
     minute = int(time // 60)
     seconds = int(time - minute * 60)
@@ -9,12 +9,12 @@ def _parse_lrc_time(time) -> str:
     return f'{minutes_str}:{seconds_str}.{ms_str}'
 
 
-def _parse_lyrics(lyrics: list) -> str:
+def parse_lyrics(lyrics: list) -> str:
     content = []
     for line in lyrics:
         time = line.get('time')
         ll = line.get('lineLyric')
         if not time:
             continue
-        content.append(f'[{_parse_lrc_time(time)}]{ll}')
+        content.append(f'[{parse_lrc_time(time)}]{ll}')
     return "\n".join(content)

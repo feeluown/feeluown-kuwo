@@ -82,9 +82,9 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
     def lyric(self):
         data = self._api.get_song_lyrics(self.identifier)
         lyrics: list = data.get('data', {}).get('lrclist', [])
-        from fuo_kuwo.utils import _parse_lyrics
+        from fuo_kuwo.utils import parse_lyrics
         return KuwoLyricModel(identifier=self.identifier,
-                              content=_parse_lyrics(lyrics))
+                              content=parse_lyrics(lyrics))
 
     @lyric.setter
     def lyric(self, value):
