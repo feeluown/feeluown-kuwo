@@ -2,7 +2,7 @@ import logging
 import time
 
 from fuocore.media import Media
-from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel
+from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel
 
 from .api import KuwoApi
 from .provider import provider
@@ -26,6 +26,14 @@ class KuwoBaseModel(BaseModel):
         provider = provider
 
 
+class KuwoLyricModel(LyricModel, BaseModel):
+    pass
+
+
+class KuwoMvModel(MvModel, KuwoBaseModel):
+    pass
+
+
 class KuwoSongModel(SongModel, KuwoBaseModel):
     _url: str
     _media: dict = {}
@@ -33,8 +41,11 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
 
     class Meta:
         allow_get = True
-        fields = ['rid', 'lossless']
+        fields = ['lossless']
         support_multi_quality = True
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @classmethod
     def get(cls, identifier):
@@ -54,6 +65,29 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
     def url(self, url):
         self._expired_at = int(time.time()) + 60 * 10
         self._url = url
+
+    @property
+    def mv(self):
+        return KuwoMvModel(name=self.title, desc='', cover=self.album.cover or '', artist=self.artists_name,
+                           media=self._api.get_song_mv(self.identifier) or '')
+
+    @mv.setter
+    def mv(self, value):
+        """Leave it empty"""
+        pass
+
+    @property
+    def lyric(self):
+        data = self._api.get_song_lyrics(self.identifier)
+        lyrics: list = data.get('data', {}).get('lrclist', [])
+        from fuo_kuwo.utils import _parse_lyrics
+        return KuwoLyricModel(identifier=self.identifier,
+                              content=_parse_lyrics(lyrics))
+
+    @lyric.setter
+    def lyric(self, value):
+        """Leave it empty"""
+        pass
 
     def list_quality(self):
         formats = ['shq', 'lq']
@@ -90,7 +124,13 @@ class KuwoArtistModel(ArtistModel, KuwoBaseModel):
 
 
 class KuwoAlbumModel(AlbumModel, KuwoBaseModel):
-    pass
+    class Meta:
+        allow_get = True
+
+    @classmethod
+    def get(cls, identifier):
+        data_album = cls._api.get_album_info(identifier)
+        return _deserialize(data_album.get('data'), KuwoAlbumSchema)
 
 
 class KuwoSearchModel(SearchModel, KuwoBaseModel):
@@ -107,5 +147,5 @@ def search(keyword, **kwargs):
 
 
 from .schemas import (
-    KuwoSongSchema,
+    KuwoSongSchema, KuwoAlbumSchema,
 )

@@ -57,6 +57,7 @@ class KuwoApi(object, metaclass=Singleton):
                           'Chrome/81.0.4044.138 Safari/537.36',
             'Host': 'kuwo.cn',
         }
+        self.mobi_headers = {'User-Agent': 'okhttp/3.10.0'}
         self.get_cookie_token()
         self.headers['csrf'] = self.token
 
@@ -69,32 +70,50 @@ class KuwoApi(object, metaclass=Singleton):
             self.cookie = response.cookies
 
     def search(self, keyword: str, limit=20, page=1):
-        uri = KuwoApi.API_BASE + '/search/searchMusicBykeyWord?key={}&pn={}&rn={}'.format(keyword, page, limit)
+        uri = KuwoApi.API_BASE + f'/search/searchMusicBykeyWord?key={keyword}&pn={page}&rn={limit}'
         with requests.Session() as session:
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
             data = response.json()
             return data
 
     def get_song_detail(self, rid: int):
-        uri = KuwoApi.API_BASE + '/music/musicInfo?mid={}'.format(rid)
+        uri = KuwoApi.API_BASE + f'/music/musicInfo?mid={rid}'
         with requests.Session() as session:
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
             data = response.json()
             return data
 
     def get_song_url(self, rid: int):
-        uri = KuwoApi.HTTP_HOST + '/url?format=mp3&rid={}&response=url&type=convert_url3&br=128kmp3&from=web&t' \
-                                  '=1589364222048'.format(rid)
+        uri = KuwoApi.HTTP_HOST + f'/url?format=mp3&rid={rid}&response=url&type=convert_url3&br=128kmp3&from=web&t' \
+                                  '=1589364222048'
         with requests.Session() as session:
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
             data = response.json()
             return data
 
     def get_song_url_mobi(self, rid, quality):
-        logger.info('Querying lossless: {} ({})'.format(rid, quality))
-        payload = 'corp=kuwo&p2p=1&type=convert_url2&sig=0&format=flac|mp3|aac&rid={}'\
-            .format(rid)
+        logger.info(f'Querying lossless: {rid} ({quality})')
+        payload = f'corp=kuwo&p2p=1&type=convert_url2&sig=0&format=flac|mp3|aac&rid={rid}'
         uri = KuwoApi.MOBI_HOST + '/mobi.s?f=kuwo&q=' + base64_encrypt(payload)
         with requests.Session() as session:
-            response = session.get(uri, headers={'User-Agent': 'okhttp/3.10.0'})
+            response = session.get(uri, headers=self.mobi_headers)
             return response.text
+
+    def get_album_info(self, aid: int, limit=20, page=1):
+        uri = KuwoApi.API_BASE + f'/album/albumInfo?albumId={aid}&pn={page}&rn={limit}'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def get_song_mv(self, rid: int):
+        uri = KuwoApi.HTTP_HOST + f'/url?rid={rid}&response=url&format=mp4%7Cmkv&type=convert_url&t=1589586895402'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            return response.text
+
+    def get_song_lyrics(self, rid: int):
+        uri = KuwoApi.MOBI_HOST + f'/newh5/singles/songinfoandlrc?musicId={rid}'
+        with requests.Session() as session:
+            response = session.get(uri, headers=self.mobi_headers)
+            return response.json()

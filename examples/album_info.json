@@ -1,0 +1,1223 @@
+{
+  "code": 200,
+  "curTime": 1589585712132,
+  "data": {
+    "artist": "创造营2020学员",
+    "releaseDate": "2020-05-09",
+    "album": "创造营2020 第2期",
+    "albumid": 13962847,
+    "pay": 0,
+    "artistid": 5073597,
+    "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+    "isstar": 0,
+    "total": 32,
+    "content_type": "0",
+    "albuminfo": "",
+    "lang": "国语",
+    "musicList": [
+      {
+        "musicrid": "MUSIC_98271789",
+        "artist": "许潇晗&卫倩妮&王靖贤&李惠玉&宋宇苗",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271789,
+        "duration": 95,
+        "content_type": "0",
+        "track": 1,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5125534,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:35",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "姐妹们的聚会(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271882",
+        "artist": "曾淑岩&张馨允&舒一灵&鹂蔓&王曦瑶",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271882,
+        "duration": 121,
+        "content_type": "0",
+        "track": 2,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5126826,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "02:01",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "Let Me Out(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271914",
+        "artist": "谢安诗&丁诗妤&卞卡&文婕&黄若元",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271914,
+        "duration": 88,
+        "content_type": "0",
+        "track": 3,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5173349,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:28",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "什么什么(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271837",
+        "artist": "敖心仪&崔文美秀&冯琬贺&田京凡&王艺瑾&刘梦[创造营2020]",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271837,
+        "duration": 104,
+        "content_type": "0",
+        "track": 4,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5127655,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:44",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "咕叽咕叽(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98273108",
+        "artist": "刘念",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98273108,
+        "duration": 95,
+        "content_type": "0",
+        "track": 6,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 2541654,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:35",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "初日(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98272476",
+        "artist": "庞雪倩&张纯如&吕欣蔚&王柯",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98272476,
+        "duration": 90,
+        "content_type": "0",
+        "track": 7,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5173321,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:30",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "欧若拉(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98273130",
+        "artist": "徐艺洋&拉娜&史文珺&毕少岩&张雅卓",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98273130,
+        "duration": 102,
+        "content_type": "0",
+        "track": 8,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 3236340,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:42",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "呼吸决定(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271964",
+        "artist": "马思惠",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271964,
+        "duration": 141,
+        "content_type": "0",
+        "track": 9,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5138028,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "02:21",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "月半小夜曲(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98273154",
+        "artist": "刘念&朱苓&万芳舟&王雨朵",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98273154,
+        "duration": 94,
+        "content_type": "0",
+        "track": 10,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 2541654,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:34",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "只想对着你Chu！Chu！Chu！(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271874",
+        "artist": "孙珍妮&SNH48赵粤&SNH48李佳恩&BEJ48陈倩楠&黄恩茹&马玉灵&陈珂",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271874,
+        "duration": 114,
+        "content_type": "0",
+        "track": 11,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 2130928,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:54",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "睫毛弯弯(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98273358",
+        "artist": "希林娜依·高",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98273358,
+        "duration": 115,
+        "content_type": "0",
+        "track": 12,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 1518540,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:55",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "颗粒季(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271704",
+        "artist": "张艺凡",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271704,
+        "duration": 70,
+        "content_type": "0",
+        "track": 13,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5173339,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:10",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "好像掉进爱情海里(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271731",
+        "artist": "朱主爱",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271731,
+        "duration": 164,
+        "content_type": "0",
+        "track": 14,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 190911,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "02:44",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "Hello！(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271739",
+        "artist": "朱主爱",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271739,
+        "duration": 78,
+        "content_type": "0",
+        "track": 15,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 190911,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:18",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "好想你(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271962",
+        "artist": "朱主爱",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271962,
+        "duration": 111,
+        "content_type": "0",
+        "track": 16,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 190911,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:51",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "老公公老婆婆(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98273413",
+        "artist": "孟欢&于扬子&吴晓凝&余子鱼",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98273413,
+        "duration": 95,
+        "content_type": "0",
+        "track": 17,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5130605,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:35",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "为你而跳(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98273279",
+        "artist": "李梦琦&吉扬柳&黄碧茵&李保怡",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98273279,
+        "duration": 100,
+        "content_type": "0",
+        "track": 18,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 3847919,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:40",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "眉飞色舞(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98271737",
+        "artist": "朱主爱",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98271737,
+        "duration": 77,
+        "content_type": "0",
+        "track": 19,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 190911,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:17",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "想写一首歌(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_98311714",
+        "artist": "火箭少女101孟美岐&R1SE周震南",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 98311714,
+        "duration": 202,
+        "content_type": "0",
+        "track": 20,
+        "hasLossless": true,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 1525082,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "03:22",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "C(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004382",
+        "artist": "许潇晗&卫倩妮&王靖贤&李惠玉&宋宇苗",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004382,
+        "duration": 94,
+        "content_type": "0",
+        "track": 21,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5125534,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:34",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "姐妹们的聚会(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004387",
+        "artist": "曾淑岩&张馨允&舒一灵&鹂蔓&王曦瑶",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004387,
+        "duration": 117,
+        "content_type": "0",
+        "track": 22,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5126826,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:57",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "Let Me Out(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004391",
+        "artist": "谢安诗&丁诗妤&卞卡&文婕&黄若元",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004391,
+        "duration": 87,
+        "content_type": "0",
+        "track": 23,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5173349,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:27",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "什么什么(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004381",
+        "artist": "敖心仪&崔文美秀&冯琬贺&刘梦[创造营2020]&田京凡&王艺瑾",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004381,
+        "duration": 120,
+        "content_type": "0",
+        "track": 24,
+        "hasLossless": true,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5127655,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "02:00",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "咕叽咕叽(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004390",
+        "artist": "庞雪倩&张纯如&吕欣蔚&王柯",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004390,
+        "duration": 87,
+        "content_type": "0",
+        "track": 25,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5173321,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:27",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "欧若拉(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004385",
+        "artist": "徐艺洋&拉娜&史文珺&毕少岩&张雅卓",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004385,
+        "duration": 109,
+        "content_type": "0",
+        "track": 26,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 3236340,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:49",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "呼吸决定(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004392",
+        "artist": "刘念&朱苓&万芳舟&王雨朵",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004392,
+        "duration": 91,
+        "content_type": "0",
+        "track": 27,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 2541654,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:31",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "只想对着你Chu！Chu！Chu！(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004393",
+        "artist": "孙珍妮&SNH48赵粤&SNH48李佳恩&BEJ48陈倩楠&黄恩茹&马玉灵&陈珂",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004393,
+        "duration": 114,
+        "content_type": "0",
+        "track": 28,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 2130928,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:54",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "睫毛弯弯(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004386",
+        "artist": "希林娜依·高",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004386,
+        "duration": 269,
+        "content_type": "0",
+        "track": 29,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 1518540,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "04:29",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "颗粒季(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004389",
+        "artist": "张艺凡",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004389,
+        "duration": 69,
+        "content_type": "0",
+        "track": 30,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5173339,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:09",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "好像掉进爱情海里(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_140004384",
+        "artist": "孟欢&于扬子&吴晓凝&余子鱼",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/84/34/910877095.jpg",
+        "isstar": 0,
+        "rid": 140004384,
+        "duration": 89,
+        "content_type": "0",
+        "track": 31,
+        "hasLossless": false,
+        "hasmv": 0,
+        "releaseDate": "2020-05-09",
+        "album": "创造营2020 第2期",
+        "albumid": 13962847,
+        "pay": "16515324",
+        "artistid": 5130605,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/84/34/910877095.jpg",
+        "songTimeMinutes": "01:29",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/84/34/910877095.jpg",
+        "name": "为你而跳(Live伴奏)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      }
+    ]
+  },
+  "msg": "success",
+  "profileId": "site",
+  "reqId": "7b221df6aec1fc24b88edff28556572d"
+}
