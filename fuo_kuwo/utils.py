@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 def parse_lrc_time(time) -> str:
     time = float(time)
     minute = int(time // 60)
@@ -9,7 +12,9 @@ def parse_lrc_time(time) -> str:
     return f'{minutes_str}:{seconds_str}.{ms_str}'
 
 
-def parse_lyrics(lyrics: list) -> str:
+def parse_lyrics(lyrics: Optional[list]) -> Optional[str]:
+    if not lyrics:
+        return None
     content = []
     for line in lyrics:
         time = line.get('time')
