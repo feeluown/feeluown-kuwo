@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Update
-        run: sudo apt update
+      run: sudo apt update
     - name: Install libmpv1
       run: sudo apt install -y libmpv1
     - name: Set up Python ${{ matrix.python-version }}
