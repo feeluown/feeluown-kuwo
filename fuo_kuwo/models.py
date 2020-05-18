@@ -97,9 +97,9 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
 
     def list_quality(self):
         formats = ['shq', 'lq']
-        if not self.lossless:
-            formats.remove('shq')
-        logger.info(formats)
+        # if not self.lossless:
+        #     formats.remove('shq')
+        # logger.info(formats)
         return formats
 
     def get_media(self, quality):
@@ -128,12 +128,29 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
 class KuwoArtistModel(ArtistModel, KuwoBaseModel):
     class Meta:
         allow_get = True
+        allow_create_albums_g = True
         fields = ['_songs', '_albums', 'info']
 
     @classmethod
     def get(cls, identifier):
         data = cls._api.get_artist_info(identifier)
         return _deserialize(data.get('data'), KuwoArtistSchema)
+
+    def create_albums_g(self):
+        limit = 20
+        page = 1
+        data = self._api.get_artist_albums(self.identifier, page=page, limit=limit)
+        if data.get('code') != 200:
+            yield from ()
+        else:
+            while True:
+                for album in data.get('data', {}).get('albumList', []):
+                    yield _deserialize(album, KuwoAlbumSchema)
+                if len(data.get('data', {}).get('albumList', [])) >= limit:
+                    page += 1
+                    data = self._api.get_artist_albums(self.identifier, page=page, limit=limit)
+                else:
+                    break
 
     @property
     def desc(self):
