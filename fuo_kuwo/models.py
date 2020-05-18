@@ -126,7 +126,58 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
 
 
 class KuwoArtistModel(ArtistModel, KuwoBaseModel):
-    pass
+    class Meta:
+        allow_get = True
+        fields = ['_songs', '_albums', 'info']
+
+    @classmethod
+    def get(cls, identifier):
+        data = cls._api.get_artist_info(identifier)
+        return _deserialize(data.get('data'), KuwoArtistSchema)
+
+    @property
+    def desc(self):
+        if not self.info:
+            artist: KuwoArtistModel = self.get(self.identifier)
+            self.info = artist.info
+        return self.info
+
+    @desc.setter
+    def desc(self, value):
+        """ Leave it empty """
+        pass
+
+    @property
+    def songs(self):
+        if self._songs is None:
+            data_songs = self._api.get_artist_songs(self.identifier)
+            songs = []
+            for data_song in data_songs.get('data', {}).get('list', []):
+                song = _deserialize(data_song, KuwoSongSchema)
+                songs.append(song)
+            self._songs = songs
+        return self._songs
+
+    @property
+    def albums(self):
+        if self._albums is None:
+            data_albums = self._api.get_artist_albums(self.identifier)
+            albums = []
+            for data_album in data_albums.get('data', {}).get('albumList', []):
+                album = _deserialize(data_album, KuwoAlbumSchema)
+                albums.append(album)
+            self._albums = albums
+        return self._albums
+
+    @albums.setter
+    def albums(self, value):
+        """ Leave it empty """
+        pass
+
+    @songs.setter
+    def songs(self, value):
+        """ Leave it empty """
+        pass
 
 
 class KuwoAlbumModel(AlbumModel, KuwoBaseModel):
@@ -159,7 +210,7 @@ class KuwoSearchModel(SearchModel, KuwoBaseModel):
     pass
 
 
-def search_song(keyword):
+def search_song(keyword: str):
     data_songs = provider.api.search(keyword)
     songs = []
     for data_song in data_songs.get('data', {}).get('list', []):
@@ -168,7 +219,7 @@ def search_song(keyword):
     return KuwoSearchModel(songs=songs)
 
 
-def search_album(keyword):
+def search_album(keyword: str):
     data_albums = provider.api.search_album(keyword)
     albums = []
     for data_album in data_albums.get('data', {}).get('albumList', []):
@@ -177,14 +228,25 @@ def search_album(keyword):
     return KuwoSearchModel(albums=albums)
 
 
-def search(keyword, **kwargs):
+def search_artist(keyword: str) -> KuwoSearchModel:
+    data_artists = provider.api.search_artist(keyword)
+    artists = []
+    for data_artist in data_artists.get('data', {}).get('artistList', []):
+        artist = _deserialize(data_artist, KuwoArtistSchema)
+        artists.append(artist)
+    return KuwoSearchModel(artists=artists)
+
+
+def search(keyword: str, **kwargs) -> KuwoSearchModel:
     type_ = SearchType.parse(kwargs['type_'])
     if type_ == SearchType.so:
         return search_song(keyword)
     if type_ == SearchType.al:
         return search_album(keyword)
+    if type_ == SearchType.ar:
+        return search_artist(keyword)
 
 
 from .schemas import (
-    KuwoSongSchema, KuwoAlbumSchema,
+    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema,
 )

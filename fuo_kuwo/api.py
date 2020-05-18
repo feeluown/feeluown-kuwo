@@ -84,6 +84,13 @@ class KuwoApi(object, metaclass=Singleton):
             data = response.json()
             return data
 
+    def search_artist(self, keyword: str, limit=20, page=1):
+        uri = KuwoApi.API_BASE + f'/search/searchArtistBykeyWord?key={keyword}&pn={page}&rn={limit}'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
     def get_song_detail(self, rid: int):
         uri = KuwoApi.API_BASE + f'/music/musicInfo?mid={rid}'
         with requests.Session() as session:
@@ -109,6 +116,27 @@ class KuwoApi(object, metaclass=Singleton):
 
     def get_album_info(self, aid: int, limit=20, page=1):
         uri = KuwoApi.API_BASE + f'/album/albumInfo?albumId={aid}&pn={page}&rn={limit}'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def get_artist_info(self, aid: int, limit=20, page=1):
+        uri = KuwoApi.API_BASE + f'/artist/artist?artistid={aid}&pn={page}&rn={limit}'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def get_artist_songs(self, aid: int, limit=20, page=1):
+        uri = KuwoApi.API_BASE + f'/artist/artistMusic?artistid={aid}&pn={page}&rn={limit}'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def get_artist_albums(self, aid: int, limit=20, page=1):
+        uri = KuwoApi.API_BASE + f'/artist/artistAlbum?artistid={aid}&pn={page}&rn={limit}'
         with requests.Session() as session:
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
             data = response.json()

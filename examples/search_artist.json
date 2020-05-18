@@ -1,0 +1,41 @@
+{
+  "code": 200,
+  "curTime": 1589768658021,
+  "data": {
+    "total": "1",
+    "rn": 30,
+    "list": [
+      {
+        "country": "中国香港",
+        "pic": "http://star.kuwo.cn/star/starheads/120/13/74/1162681937.jpg",
+        "musicNum": 2278,
+        "pic120": "http://star.kuwo.cn/star/starheads/120/13/74/1162681937.jpg",
+        "isStar": 0,
+        "content_type": "0",
+        "name": "陈奕迅",
+        "pic70": "http://star.kuwo.cn/star/starheads/70/13/74/1162681937.jpg",
+        "id": 47,
+        "pic300": "http://star.kuwo.cn/star/starheads/300/13/74/1162681937.jpg"
+      }
+    ],
+    "artistList": [
+      {
+        "country": "中国香港",
+        "artistFans": 361703,
+        "pic": "http://star.kuwo.cn/star/starheads/120/13/74/1162681937.jpg",
+        "musicNum": 2278,
+        "pic120": "http://star.kuwo.cn/star/starheads/120/13/74/1162681937.jpg",
+        "isStar": 0,
+        "content_type": "0",
+        "name": "陈奕迅",
+        "pic70": "http://star.kuwo.cn/star/starheads/70/13/74/1162681937.jpg",
+        "id": 47,
+        "pic300": "http://star.kuwo.cn/star/starheads/300/13/74/1162681937.jpg"
+      }
+    ],
+    "pn": 0
+  },
+  "msg": "success",
+  "profileId": "site",
+  "reqId": "21af295b10e676f97b3105e428e615db"
+}

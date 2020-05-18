@@ -55,4 +55,17 @@ class KuwoAlbumSchema(Schema):
                               _songs=data.get('songs'))
 
 
+class KuwoArtistSchema(Schema):
+    identifier = fields.Int(data_key='id', required=True)
+    name = fields.Str(data_key='name', required=True)
+    pic = fields.Str(data_key='pic', required=False)
+    pic300 = fields.Str(data_key='pic300', required=False)
+    desc = fields.Str(data_key='info', required=False)
+
+    @post_load
+    def create_model(self, data, **kwargs):
+        return KuwoArtistModel(identifier=data.get('identifier'), name=data.get('name'), cover=data.get('pic300'),
+                               desc=data.get('desc'), info=data.get('desc'))
+
+
 from .models import KuwoSongModel, KuwoArtistModel, KuwoAlbumModel
