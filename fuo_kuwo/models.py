@@ -2,7 +2,8 @@ import logging
 import time
 
 from fuocore.media import Media
-from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel
+from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
+    SearchType
 
 from .api import KuwoApi
 from .provider import provider
@@ -70,7 +71,10 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
     def mv(self):
         if self.hasmv != 1:
             return None
-        return KuwoMvModel(name=self.title, desc='', cover=self.album.cover or '', artist=self.artists_name,
+        cover = ''
+        if self.album and self.album.cover:
+            cover = self.album.cover
+        return KuwoMvModel(name=self.title, desc='', cover=cover, artist=self.artists_name,
                            media=self._api.get_song_mv(self.identifier) or '')
 
     @mv.setter
@@ -128,24 +132,57 @@ class KuwoArtistModel(ArtistModel, KuwoBaseModel):
 class KuwoAlbumModel(AlbumModel, KuwoBaseModel):
     class Meta:
         allow_get = True
+        fields = ['_songs']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @classmethod
     def get(cls, identifier):
         data_album = cls._api.get_album_info(identifier)
         return _deserialize(data_album.get('data'), KuwoAlbumSchema)
 
+    @property
+    def songs(self):
+        if self._songs is None:
+            data_album = self._api.get_album_info(self.identifier)
+            songs = data_album.get('data', {}).get('musicList', [])
+            self._songs = list(map(lambda x: _deserialize(x, KuwoSongSchema), songs))
+        return self._songs
+
+    @songs.setter
+    def songs(self, value):
+        self._songs = value
+
 
 class KuwoSearchModel(SearchModel, KuwoBaseModel):
     pass
 
 
-def search(keyword, **kwargs):
+def search_song(keyword):
     data_songs = provider.api.search(keyword)
     songs = []
-    for data_song in data_songs.get('data').get('list'):
+    for data_song in data_songs.get('data', {}).get('list', []):
         song = _deserialize(data_song, KuwoSongSchema)
         songs.append(song)
     return KuwoSearchModel(songs=songs)
+
+
+def search_album(keyword):
+    data_albums = provider.api.search_album(keyword)
+    albums = []
+    for data_album in data_albums.get('data', {}).get('albumList', []):
+        album = _deserialize(data_album, KuwoAlbumSchema)
+        albums.append(album)
+    return KuwoSearchModel(albums=albums)
+
+
+def search(keyword, **kwargs):
+    type_ = SearchType.parse(kwargs['type_'])
+    if type_ == SearchType.so:
+        return search_song(keyword)
+    if type_ == SearchType.al:
+        return search_album(keyword)
 
 
 from .schemas import (

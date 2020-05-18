@@ -1,3 +1,5 @@
+from html import unescape
+
 from marshmallow import Schema, fields, post_load, EXCLUDE
 
 
@@ -43,12 +45,14 @@ class KuwoAlbumSchema(Schema):
     artist = fields.Str(data_key='artist', required=True)
     artistid = fields.Int(data_key='artistid', required=True)
     albuminfo = fields.Str(data_key='albuminfo', required=False)
+    songs = fields.List(fields.Nested('KuwoSongSchema'), data_key='musicList', allow_none=True, required=False)
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoAlbumModel(identifier=data.get('identifier'), name=data.get('name'),
+        return KuwoAlbumModel(identifier=data.get('identifier'), name=unescape(data.get('name')),
                               artists=[KuwoArtistModel(identifier=data.get('artistid'), name=data.get('artist'))],
-                              desc=data.get('albuminfo', ''))
+                              desc=data.get('albuminfo', '').replace('<br>', '\n'), cover=data.get('cover'), songs=[],
+                              _songs=data.get('songs'))
 
 
 from .models import KuwoSongModel, KuwoArtistModel, KuwoAlbumModel

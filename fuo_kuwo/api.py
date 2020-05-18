@@ -77,6 +77,13 @@ class KuwoApi(object, metaclass=Singleton):
             data = response.json()
             return data
 
+    def search_album(self, keyword: str, limit=20, page=1):
+        uri = KuwoApi.API_BASE + f'/search/searchAlbumBykeyWord?key={keyword}&pn={page}&rn={limit}'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
     def get_song_detail(self, rid: int):
         uri = KuwoApi.API_BASE + f'/music/musicInfo?mid={rid}'
         with requests.Session() as session:
