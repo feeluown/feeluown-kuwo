@@ -3,7 +3,7 @@ import time
 
 from fuocore.media import Media
 from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
-    SearchType
+    SearchType, PlaylistModel
 
 from .api import KuwoApi
 from .provider import provider
@@ -223,6 +223,33 @@ class KuwoAlbumModel(AlbumModel, KuwoBaseModel):
         self._songs = value
 
 
+class KuwoPlaylistModel(PlaylistModel, KuwoBaseModel):
+    class Meta:
+        allow_get = True
+        allow_create_songs_g = True
+
+    @classmethod
+    def get(cls, identifier):
+        data_album = cls._api.get_playlist_info(identifier)
+        return _deserialize(data_album.get('data'), KuwoPlaylistSchema)
+
+    def create_songs_g(self):
+        limit = 20
+        page = 1
+        data = self._api.get_playlist_info(self.identifier, page=page, limit=limit)
+        if data.get('code') != 200:
+            yield from ()
+        else:
+            while True:
+                for album in data.get('data', {}).get('musicList', []):
+                    yield _deserialize(album, KuwoSongSchema)
+                if len(data.get('data', {}).get('musicList', [])) >= limit:
+                    page += 1
+                    data = self._api.get_playlist_info(self.identifier, page=page, limit=limit)
+                else:
+                    break
+
+
 class KuwoSearchModel(SearchModel, KuwoBaseModel):
     pass
 
@@ -254,6 +281,15 @@ def search_artist(keyword: str) -> KuwoSearchModel:
     return KuwoSearchModel(artists=artists)
 
 
+def search_playlist(keyword: str) -> KuwoSearchModel:
+    data_playlists = provider.api.search_playlist(keyword)
+    playlists = []
+    for data_playlist in data_playlists.get('data', {}).get('list', []):
+        playlist = _deserialize(data_playlist, KuwoPlaylistSchema)
+        playlists.append(playlist)
+    return KuwoSearchModel(playlists=playlists)
+
+
 def search(keyword: str, **kwargs) -> KuwoSearchModel:
     type_ = SearchType.parse(kwargs['type_'])
     if type_ == SearchType.so:
@@ -262,8 +298,10 @@ def search(keyword: str, **kwargs) -> KuwoSearchModel:
         return search_album(keyword)
     if type_ == SearchType.ar:
         return search_artist(keyword)
+    if type_ == SearchType.pl:
+        return search_playlist(keyword)
 
 
 from .schemas import (
-    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema,
+    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema,
 )

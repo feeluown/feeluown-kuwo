@@ -1,0 +1,1212 @@
+{
+  "code": 200,
+  "curTime": 1589774001132,
+  "data": {
+    "img": "http://img1.kwcdn.kuwo.cn/star/userpl2015/7/57/1514647518275_167324907_700.jpg",
+    "uPic": "http://img2.kuwo.cn/star/userhead/7/57/1539871683325_167324907.jpg",
+    "uname": "15256906955",
+    "img700": "http://img1.kwcdn.kuwo.cn/star/userpl2015/7/57/1514647518275_167324907_700.jpg",
+    "img300": "http://img1.kwcdn.kuwo.cn/star/userpl2015/7/57/1514647518275_167324907b.jpg",
+    "userName": "深丿海",
+    "img500": "http://img1.kwcdn.kuwo.cn/star/userpl2015/7/57/1514647518275_167324907_500.jpg",
+    "total": 41,
+    "name": "粤语l不得不听的经典粤曲",
+    "listencnt": 4208671,
+    "id": 2374346296,
+    "tag": "经典,粤语,80年代",
+    "musicList": [
+      {
+        "musicrid": "MUSIC_4681151",
+        "artist": "Beyond",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img3.kuwo.cn/star/albumcover/300/32/21/2015559012.jpg",
+        "isstar": 0,
+        "rid": 4681151,
+        "duration": 275,
+        "content_type": "0",
+        "track": 14,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2007-07-09",
+        "album": "乐坛班霸-宝丽金华纳十年对垒",
+        "albumid": 204214,
+        "pay": "16515324",
+        "artistid": 1250,
+        "albumpic": "http://img3.kuwo.cn/star/albumcover/500/32/21/2015559012.jpg",
+        "songTimeMinutes": "04:35",
+        "isListenFee": false,
+        "pic120": "http://img3.kuwo.cn/star/albumcover/120/32/21/2015559012.jpg",
+        "name": "真的爱你",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_1106172",
+        "artist": "Beyond",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img3.kuwo.cn/star/albumcover/300/45/94/1438804647.jpg",
+        "isstar": 0,
+        "rid": 1106172,
+        "duration": 298,
+        "content_type": "0",
+        "track": 35,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2015-06-24",
+        "album": "黄家驹原作精选集",
+        "albumid": 68886,
+        "pay": "16515324",
+        "artistid": 1250,
+        "albumpic": "http://img3.kuwo.cn/star/albumcover/500/45/94/1438804647.jpg",
+        "songTimeMinutes": "04:58",
+        "isListenFee": false,
+        "pic120": "http://img3.kuwo.cn/star/albumcover/120/45/94/1438804647.jpg",
+        "name": "光辉岁月",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_500101",
+        "artist": "陈柏宇",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/52/45/2882323614.jpg",
+        "isstar": 0,
+        "rid": 500101,
+        "duration": 240,
+        "content_type": "0",
+        "track": 2,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2009-05-11",
+        "album": "Close Up",
+        "albumid": 36135,
+        "pay": "16515324",
+        "artistid": 1532,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/52/45/2882323614.jpg",
+        "songTimeMinutes": "04:00",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/52/45/2882323614.jpg",
+        "name": "你瞒我瞒",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_1104688",
+        "artist": "郑欣宜",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/15/82/3473452622.jpg",
+        "isstar": 0,
+        "rid": 1104688,
+        "duration": 229,
+        "content_type": "0",
+        "track": 4,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2011-10-31",
+        "album": "故事的配角",
+        "albumid": 76799,
+        "pay": "16515324",
+        "artistid": 3597,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/15/82/3473452622.jpg",
+        "songTimeMinutes": "03:49",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/15/82/3473452622.jpg",
+        "name": "上心",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_1107691",
+        "artist": "吴雨霏",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img2.kuwo.cn/star/albumcover/300/55/38/1650835783.jpg",
+        "isstar": 0,
+        "rid": 1107691,
+        "duration": 225,
+        "content_type": "0",
+        "track": 4,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2011-11-15",
+        "album": "我本人",
+        "albumid": 77037,
+        "pay": "16515324",
+        "artistid": 1717,
+        "albumpic": "http://img2.kuwo.cn/star/albumcover/500/55/38/1650835783.jpg",
+        "songTimeMinutes": "03:45",
+        "isListenFee": false,
+        "pic120": "http://img2.kuwo.cn/star/albumcover/120/55/38/1650835783.jpg",
+        "name": "吴哥窟",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_80080",
+        "artist": "陈慧娴",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/39/97/3929967462.jpg",
+        "isstar": 0,
+        "rid": 80080,
+        "duration": 301,
+        "content_type": "0",
+        "track": 16,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1993-01-01",
+        "album": "千千阙歌",
+        "albumid": 3985139,
+        "pay": "16515324",
+        "artistid": 233,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/39/97/3929967462.jpg",
+        "songTimeMinutes": "05:01",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/39/97/3929967462.jpg",
+        "name": "千千阙歌",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_5245130",
+        "artist": "G.E.M.邓紫棋",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img3.kuwo.cn/star/albumcover/300/20/5/656820488.jpg",
+        "isstar": 0,
+        "rid": 5245130,
+        "duration": 239,
+        "content_type": "0",
+        "track": 1,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2014-08-15",
+        "album": "喜欢你",
+        "albumid": 429166,
+        "pay": "16515324",
+        "artistid": 5371,
+        "albumpic": "http://img3.kuwo.cn/star/albumcover/500/20/5/656820488.jpg",
+        "songTimeMinutes": "03:59",
+        "isListenFee": false,
+        "pic120": "http://img3.kuwo.cn/star/albumcover/120/20/5/656820488.jpg",
+        "name": "喜欢你",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_5886682",
+        "artist": "Beyond",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/28/42/1776247091.jpg",
+        "isstar": 0,
+        "rid": 5886682,
+        "duration": 324,
+        "content_type": "0",
+        "track": 6,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1993-05-01",
+        "album": "乐与怒",
+        "albumid": 2676,
+        "pay": "16711935",
+        "artistid": 1250,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/28/42/1776247091.jpg",
+        "songTimeMinutes": "05:24",
+        "isListenFee": true,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/28/42/1776247091.jpg",
+        "name": "海阔天空",
+        "online": 1,
+        "payInfo": {
+          "play": "1111",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "listen_fragment": "1",
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_142801",
+        "artist": "陈百强",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/35/68/263923441.jpg",
+        "isstar": 0,
+        "rid": 142801,
+        "duration": 210,
+        "content_type": "0",
+        "track": 1,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1983-08-01",
+        "album": "偏偏喜欢你",
+        "albumid": 59,
+        "pay": "16711935",
+        "artistid": 1045,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/35/68/263923441.jpg",
+        "songTimeMinutes": "03:30",
+        "isListenFee": true,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/35/68/263923441.jpg",
+        "name": "偏偏喜欢你",
+        "online": 1,
+        "payInfo": {
+          "play": "1111",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "listen_fragment": "1",
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_157767",
+        "artist": "张学友",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/13/91/1292169532.jpg",
+        "isstar": 0,
+        "rid": 157767,
+        "duration": 255,
+        "content_type": "0",
+        "track": 1,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2013-01-01",
+        "album": "等你等到我心痛",
+        "albumid": 1100,
+        "pay": "16515324",
+        "artistid": 896,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/13/91/1292169532.jpg",
+        "songTimeMinutes": "04:15",
+        "isListenFee": false,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/13/91/1292169532.jpg",
+        "name": "等你等到我心痛",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_110247",
+        "artist": "陈奕迅",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/83/42/4180851740.jpg",
+        "isstar": 0,
+        "rid": 110247,
+        "duration": 289,
+        "content_type": "0",
+        "track": 5,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2005-06-07",
+        "album": "U-87",
+        "albumid": 6264,
+        "pay": "16515324",
+        "artistid": 47,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/83/42/4180851740.jpg",
+        "songTimeMinutes": "04:49",
+        "isListenFee": false,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/83/42/4180851740.jpg",
+        "name": "浮夸",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_78767",
+        "artist": "李克勤",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/90/23/709974741.jpg",
+        "isstar": 0,
+        "rid": 78767,
+        "duration": 292,
+        "content_type": "0",
+        "track": 11,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1989-01-01",
+        "album": "李克勤极品之选",
+        "albumid": 16039,
+        "pay": "16515324",
+        "artistid": 490,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/90/23/709974741.jpg",
+        "songTimeMinutes": "04:52",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/90/23/709974741.jpg",
+        "name": "月半小夜曲",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_89365",
+        "artist": "罗大佑",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "nationid": "0",
+        "pic": "http://img3.kuwo.cn/star/starheads/300/21/8/1852988902.jpg",
+        "isstar": 0,
+        "rid": 89365,
+        "duration": 253,
+        "content_type": "0",
+        "track": 19,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1970-01-01",
+        "album": "",
+        "albumid": 0,
+        "pay": "16515324",
+        "artistid": 1234,
+        "albumpic": "http://img3.kuwo.cn/star/starheads/500/21/8/1852988902.jpg",
+        "songTimeMinutes": "04:13",
+        "isListenFee": false,
+        "pic120": "http://img3.kuwo.cn/star/starheads/120/21/8/1852988902.jpg",
+        "name": "皇后大道东",
+        "online": 0,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_6760532",
+        "artist": "陈百强",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/25/18/636560402.jpg",
+        "isstar": 0,
+        "rid": 6760532,
+        "duration": 287,
+        "content_type": "0",
+        "track": 12,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2014-12-30",
+        "album": "华纳我爱经典影视金曲",
+        "albumid": 526640,
+        "pay": "16711935",
+        "artistid": 1045,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/25/18/636560402.jpg",
+        "songTimeMinutes": "04:47",
+        "isListenFee": true,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/25/18/636560402.jpg",
+        "name": "一生何求",
+        "online": 1,
+        "payInfo": {
+          "play": "1111",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "listen_fragment": "1",
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_25372840",
+        "artist": "王杰",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/92/51/2873424418.jpg",
+        "isstar": 0,
+        "rid": 25372840,
+        "duration": 268,
+        "content_type": "0",
+        "track": 6,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2017-06-15",
+        "album": "围炉音乐会 第20期",
+        "albumid": 3296399,
+        "pay": "16515324",
+        "artistid": 1892,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/92/51/2873424418.jpg",
+        "songTimeMinutes": "04:28",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/92/51/2873424418.jpg",
+        "name": "不浪漫罪名(Live)",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_1108363",
+        "artist": "周华健",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "nationid": "0",
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/18/34/348086044.jpg",
+        "isstar": 0,
+        "rid": 1108363,
+        "duration": 288,
+        "content_type": "0",
+        "track": 1,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1997-01-07",
+        "album": "乐剧2电视原声带",
+        "albumid": 5322580,
+        "pay": "16515324",
+        "artistid": 332,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/18/34/348086044.jpg",
+        "songTimeMinutes": "04:48",
+        "isListenFee": false,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/18/34/348086044.jpg",
+        "name": "难念的经",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_1106161",
+        "artist": "Beyond",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "nationid": "0",
+        "pic": "http://img3.kuwo.cn/star/starheads/300/47/68/3668920800.jpg",
+        "isstar": 0,
+        "rid": 1106161,
+        "duration": 251,
+        "content_type": "0",
+        "track": 13,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1970-01-01",
+        "album": "",
+        "albumid": 0,
+        "pay": "16515324",
+        "artistid": 1250,
+        "albumpic": "http://img3.kuwo.cn/star/starheads/500/47/68/3668920800.jpg",
+        "songTimeMinutes": "04:11",
+        "isListenFee": false,
+        "pic120": "http://img3.kuwo.cn/star/starheads/120/47/68/3668920800.jpg",
+        "name": "谁伴我闯荡",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_6683591",
+        "artist": "谭咏麟",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img2.kuwo.cn/star/albumcover/300/90/76/274823083.jpg",
+        "isstar": 0,
+        "rid": 6683591,
+        "duration": 262,
+        "content_type": "0",
+        "track": 13,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1997-08-01",
+        "album": "讲不出再见",
+        "albumid": 519569,
+        "pay": "16515324",
+        "artistid": 810,
+        "albumpic": "http://img2.kuwo.cn/star/albumcover/500/90/76/274823083.jpg",
+        "songTimeMinutes": "04:22",
+        "isListenFee": false,
+        "pic120": "http://img2.kuwo.cn/star/albumcover/120/90/76/274823083.jpg",
+        "name": "一生中最爱",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_380326",
+        "artist": "孙耀威",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img2.kuwo.cn/star/albumcover/300/58/68/1328869410.jpg",
+        "isstar": 0,
+        "rid": 380326,
+        "duration": 239,
+        "content_type": "0",
+        "track": 11,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2008-04-01",
+        "album": "我... 真的受伤了",
+        "albumid": 19241,
+        "pay": "0",
+        "artistid": 716,
+        "albumpic": "http://img2.kuwo.cn/star/albumcover/500/58/68/1328869410.jpg",
+        "songTimeMinutes": "03:59",
+        "isListenFee": false,
+        "pic120": "http://img2.kuwo.cn/star/albumcover/120/58/68/1328869410.jpg",
+        "name": "爱的故事(上集)",
+        "online": 1,
+        "payInfo": {
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0
+        }
+      },
+      {
+        "musicrid": "MUSIC_4076579",
+        "artist": "张学友",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img4.kuwo.cn/star/albumcover/300/63/93/2764633881.jpg",
+        "isstar": 0,
+        "rid": 4076579,
+        "duration": 267,
+        "content_type": "0",
+        "track": 5,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1993-01-01",
+        "album": "我与你",
+        "albumid": 1059,
+        "pay": "16515324",
+        "artistid": 896,
+        "albumpic": "http://img4.kuwo.cn/star/albumcover/500/63/93/2764633881.jpg",
+        "songTimeMinutes": "04:27",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/albumcover/120/63/93/2764633881.jpg",
+        "name": "旧情绵绵",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_16176591",
+        "artist": "林子祥",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "nationid": "0",
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/81/91/604230312.jpg",
+        "isstar": 0,
+        "rid": 16176591,
+        "duration": 200,
+        "content_type": "0",
+        "track": 3,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1995-12-01",
+        "album": "祥情廿载",
+        "albumid": 1381716,
+        "pay": "16711935",
+        "artistid": 646,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/81/91/604230312.jpg",
+        "songTimeMinutes": "03:20",
+        "isListenFee": true,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/81/91/604230312.jpg",
+        "name": "谁能明白我",
+        "online": 1,
+        "payInfo": {
+          "play": "1111",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "listen_fragment": "1",
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_170469",
+        "artist": "徐小凤",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "nationid": "0",
+        "pic": "http://img2.kuwo.cn/star/albumcover/300/12/62/2456510406.jpg",
+        "isstar": 0,
+        "rid": 170469,
+        "duration": 224,
+        "content_type": "0",
+        "track": 1,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "1986-06-01",
+        "album": "徐小凤金曲精选",
+        "albumid": 63965,
+        "pay": "16515324",
+        "artistid": 664,
+        "albumpic": "http://img2.kuwo.cn/star/albumcover/500/12/62/2456510406.jpg",
+        "songTimeMinutes": "03:44",
+        "isListenFee": false,
+        "pic120": "http://img2.kuwo.cn/star/albumcover/120/12/62/2456510406.jpg",
+        "name": "顺流逆流",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_91447",
+        "artist": "张学友",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "nationid": "0",
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/36/2/1999621222.jpg",
+        "isstar": 0,
+        "rid": 91447,
+        "duration": 224,
+        "content_type": "0",
+        "track": 9,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2004-01-01",
+        "album": "Life Is Like A Dream",
+        "albumid": 4712,
+        "pay": "16515324",
+        "artistid": 896,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/36/2/1999621222.jpg",
+        "songTimeMinutes": "03:44",
+        "isListenFee": false,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/36/2/1999621222.jpg",
+        "name": "讲你知",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_127207",
+        "artist": "张国荣",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/93/72/1341963465.jpg",
+        "isstar": 0,
+        "rid": 127207,
+        "duration": 253,
+        "content_type": "0",
+        "track": 6,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2006-01-01",
+        "album": "Hot Summer",
+        "albumid": 1136,
+        "pay": "16515324",
+        "artistid": 833,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/93/72/1341963465.jpg",
+        "songTimeMinutes": "04:13",
+        "isListenFee": false,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/93/72/1341963465.jpg",
+        "name": "沉默是金",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_322427",
+        "artist": "许冠杰",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img2.kuwo.cn/star/albumcover/300/17/37/2829230824.jpg",
+        "isstar": 0,
+        "rid": 322427,
+        "duration": 147,
+        "content_type": "0",
+        "track": 1,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2013-01-01",
+        "album": "半斤八两",
+        "albumid": 12361,
+        "pay": "16515324",
+        "artistid": 410,
+        "albumpic": "http://img2.kuwo.cn/star/albumcover/500/17/37/2829230824.jpg",
+        "songTimeMinutes": "02:27",
+        "isListenFee": false,
+        "pic120": "http://img2.kuwo.cn/star/albumcover/120/17/37/2829230824.jpg",
+        "name": "半斤八两",
+        "online": 1,
+        "payInfo": {
+          "play": "1100",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_6488532",
+        "artist": "杨千嬅",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "nationid": "0",
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/19/18/3687959926.jpg",
+        "isstar": 0,
+        "rid": 6488532,
+        "duration": 238,
+        "content_type": "0",
+        "track": 34,
+        "hasLossless": true,
+        "hasmv": 0,
+        "releaseDate": "2015-06-25",
+        "album": "粤语歌曲精选",
+        "albumid": 506568,
+        "pay": "16711935",
+        "artistid": 1367,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/19/18/3687959926.jpg",
+        "songTimeMinutes": "03:58",
+        "isListenFee": true,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/19/18/3687959926.jpg",
+        "name": "再见二丁目",
+        "online": 1,
+        "payInfo": {
+          "play": "1111",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "listen_fragment": "1",
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_22811496",
+        "artist": "刘德华",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img3.kuwo.cn/star/albumcover/300/90/82/4278919089.jpg",
+        "isstar": 0,
+        "rid": 22811496,
+        "duration": 230,
+        "content_type": "0",
+        "track": 0,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2012-08-10",
+        "album": "我们的刘德华 (粤语版)",
+        "albumid": 2186970,
+        "pay": "16711935",
+        "artistid": 286,
+        "albumpic": "http://img3.kuwo.cn/star/albumcover/500/90/82/4278919089.jpg",
+        "songTimeMinutes": "03:50",
+        "isListenFee": true,
+        "pic120": "http://img3.kuwo.cn/star/albumcover/120/90/82/4278919089.jpg",
+        "name": "暗里着迷",
+        "online": 1,
+        "payInfo": {
+          "play": "1111",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "listen_fragment": "1",
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_623641",
+        "artist": "郑秀文",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/6/2/701012823.jpg",
+        "isstar": 0,
+        "rid": 623641,
+        "duration": 205,
+        "content_type": "0",
+        "track": 3,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2001-07-01",
+        "album": "Shocking Pink",
+        "albumid": 2556,
+        "pay": "16711935",
+        "artistid": 307,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/6/2/701012823.jpg",
+        "songTimeMinutes": "03:25",
+        "isListenFee": true,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/6/2/701012823.jpg",
+        "name": "终身美丽",
+        "online": 1,
+        "payInfo": {
+          "play": "1111",
+          "download": "1111",
+          "local_encrypt": "1",
+          "cannotDownload": 0,
+          "listen_fragment": "1",
+          "cannotOnlinePlay": 0,
+          "feeType": {
+            "song": "1",
+            "vip": "1"
+          },
+          "down": "1111"
+        }
+      },
+      {
+        "musicrid": "MUSIC_120842",
+        "artist": "卫兰",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "pic": "http://img1.kuwo.cn/star/albumcover/300/93/24/2295563663.jpg",
+        "isstar": 0,
+        "rid": 120842,
+        "duration": 237,
+        "content_type": "0",
+        "track": 8,
+        "hasLossless": true,
+        "hasmv": 1,
+        "releaseDate": "2005-11-10",
+        "album": "My Love",
+        "albumid": 7904,
+        "pay": "0",
+        "artistid": 2503,
+        "albumpic": "http://img1.kuwo.cn/star/albumcover/500/93/24/2295563663.jpg",
+        "songTimeMinutes": "03:57",
+        "isListenFee": false,
+        "pic120": "http://img1.kuwo.cn/star/albumcover/120/93/24/2295563663.jpg",
+        "name": "大哥",
+        "online": 0,
+        "payInfo": {
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0
+        }
+      },
+      {
+        "musicrid": "MUSIC_7269501",
+        "artist": "黎瑞恩",
+        "mvpayinfo": {
+          "play": 0,
+          "vid": 0,
+          "down": 0
+        },
+        "nationid": "0",
+        "pic": "http://img4.kuwo.cn/star/starheads/300/11/37/2864573312.jpg",
+        "isstar": 0,
+        "rid": 7269501,
+        "duration": 233,
+        "content_type": "0",
+        "track": 0,
+        "hasLossless": true,
+        "hasmv": 0,
+        "releaseDate": "1970-01-01",
+        "album": "",
+        "albumid": 0,
+        "pay": "0",
+        "artistid": 591,
+        "albumpic": "http://img4.kuwo.cn/star/starheads/500/11/37/2864573312.jpg",
+        "songTimeMinutes": "03:53",
+        "isListenFee": false,
+        "pic120": "http://img4.kuwo.cn/star/starheads/120/11/37/2864573312.jpg",
+        "name": "一人有一个理想",
+        "online": 1,
+        "payInfo": {
+          "cannotDownload": 0,
+          "cannotOnlinePlay": 0
+        }
+      }
+    ],
+    "desc": "",
+    "info": "好的歌曲不会因为时间而变质，反而会沉淀地更有韵味"
+  },
+  "msg": "success",
+  "profileId": "site",
+  "reqId": "d450c91afaba8d0013c6d2679bbb0367"
+}
