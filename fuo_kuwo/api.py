@@ -98,7 +98,12 @@ class KuwoApi(object, metaclass=Singleton):
             data = response.json()
             return data
 
-    def get_song_detail(self, rid: int):
+    def get_song_detail(self, rid: int) -> dict:
+        """
+        获取歌曲信息
+        :param int rid: musicrid
+        :return dict 歌曲信息
+        """
         uri = KuwoApi.API_BASE + f'/music/musicInfo?mid={rid}'
         with requests.Session() as session:
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
@@ -114,8 +119,13 @@ class KuwoApi(object, metaclass=Singleton):
             return data
 
     def get_song_url_mobi(self, rid, quality):
-        logger.info(f'Querying lossless: {rid} ({quality})')
-        payload = f'corp=kuwo&p2p=1&type=convert_url2&sig=0&format=flac|mp3|aac&rid={rid}'
+        if quality == 'shq':
+            logger.info(f'Querying lossless: {rid} ({quality})')
+            formats = 'flac|mp3|aac'
+        else:
+            logger.info(f'Querying best mp3: {rid} ({quality})')
+            formats = 'mp3|aac'
+        payload = f'corp=kuwo&p2p=1&type=convert_url2&sig=0&format={formats}&rid={rid}'
         uri = KuwoApi.MOBI_HOST + '/mobi.s?f=kuwo&q=' + base64_encrypt(payload)
         with requests.Session() as session:
             response = session.get(uri, headers=self.mobi_headers)
