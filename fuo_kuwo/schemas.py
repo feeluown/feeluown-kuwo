@@ -51,7 +51,7 @@ class KuwoAlbumSchema(Schema):
     def create_model(self, data, **kwargs):
         return KuwoAlbumModel(identifier=data.get('identifier'), name=unescape(data.get('name')),
                               artists=[KuwoArtistModel(identifier=data.get('artistid'), name=data.get('artist'))],
-                              desc=data.get('albuminfo', '').replace('<br>', '\n'), cover=data.get('cover'), songs=[],
+                              desc=unescape(data.get('albuminfo', '')).replace('\n', '<br>'), cover=data.get('cover'), songs=[],
                               _songs=data.get('songs'))
 
 
