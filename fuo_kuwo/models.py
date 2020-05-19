@@ -96,7 +96,7 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         pass
 
     def list_quality(self):
-        return ['shq', 'sq', 'lq']
+        return ['shq', 'hq', 'lq']
 
     def get_media(self, quality):
         logger.info(quality)
