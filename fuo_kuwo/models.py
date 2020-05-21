@@ -96,7 +96,10 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         pass
 
     def list_quality(self):
-        return ['shq', 'hq', 'lq']
+        formats = ['shq', 'hq', 'lq']
+        if not self.lossless:
+            formats.remove('shq')
+        return formats
 
     def get_media(self, quality):
         logger.info(quality)
