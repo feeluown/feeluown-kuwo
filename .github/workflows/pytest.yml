@@ -21,16 +21,18 @@ jobs:
     - uses: actions/checkout@v2
     - name: Update
       run: sudo apt update
-    - name: Install libmpv1
-      run: sudo apt install -y libmpv1
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Update
+      uses: VaultVulp/action-pipenv@v2.0.1
+      with:
+        command: run pre-install-deps
     - name: Install libmpv1
       uses: VaultVulp/action-pipenv@v2.0.1
       with:
-        command: install-deps
+        command: run install-deps
     - name: Install dependecies
       uses: VaultVulp/action-pipenv@v2.0.1
       with:

@@ -17,6 +17,7 @@ pyqt5 = "*"
 python_version = "3.8"
 
 [scripts]
+pre-install-deps = "sudo apt update"
 install-deps = "sudo apt install -y libmpv1"
 test = "pytest -v --ignore-glob='*_api.py'"
 test-all = "pytest -v"
