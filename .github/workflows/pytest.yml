@@ -28,9 +28,9 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install libmpv1
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: install-deps
+      uses: VaultVulp/action-pipenv@v2.0.1
+      with:
+        command: install-deps
     - name: Install dependecies
       uses: VaultVulp/action-pipenv@v2.0.1
       with:
