@@ -121,7 +121,7 @@ class KuwoApi(object, metaclass=Singleton):
     def get_song_url_mobi(self, rid, quality):
         if quality == 'shq':
             logger.info(f'Querying lossless: {rid} ({quality})')
-            formats = 'flac|mp3|aac'
+            formats = 'ape|flac|mp3|aac'
         else:
             logger.info(f'Querying best mp3: {rid} ({quality})')
             formats = 'mp3|aac'
