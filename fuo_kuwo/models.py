@@ -12,6 +12,13 @@ logger = logging.getLogger(__name__)
 
 
 def _deserialize(data, schema_class, gotten=True):
+    """ deserialize schema data to model
+
+    :param data: data to be deserialize
+    :param schema_class: schema class
+    :param gotten:
+    :return:
+    """
     schema = schema_class()
     obj = schema.load(data)
     if gotten:
@@ -128,12 +135,29 @@ class KuwoArtistModel(ArtistModel, KuwoBaseModel):
     class Meta:
         allow_get = True
         allow_create_albums_g = True
+        allow_create_songs_g = True
         fields = ['_songs', '_albums', 'info']
 
     @classmethod
     def get(cls, identifier):
         data = cls._api.get_artist_info(identifier)
         return _deserialize(data.get('data'), KuwoArtistSchema)
+
+    def create_songs_g(self):
+        limit = 20
+        page = 1
+        data = self._api.get_artist_songs(self.identifier, page=page, limit=limit)
+        if data.get('code') != 200:
+            yield from ()
+        else:
+            while True:
+                for song in data.get('data', {}).get('list', []):
+                    yield _deserialize(song, KuwoSongSchema)
+                if len(data.get('data', {}).get('list', [])) >= limit:
+                    page += 1
+                    data = self._api.get_artist_songs(self.identifier, page=page, limit=limit)
+                else:
+                    break
 
     def create_albums_g(self):
         limit = 20

@@ -64,7 +64,7 @@ class KuwoArtistSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoArtistModel(identifier=data.get('identifier'), name=data.get('name'), cover=data.get('pic300'),
+        return KuwoArtistModel(identifier=data.get('identifier'), name=unescape(data.get('name')), cover=data.get('pic300'),
                                desc=data.get('desc'), info=data.get('desc'))
 
 
