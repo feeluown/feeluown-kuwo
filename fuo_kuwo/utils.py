@@ -1,4 +1,5 @@
 import ctypes
+from html import unescape
 from typing import Optional, Any
 
 
@@ -51,7 +52,7 @@ def parse_lyrics(lyrics: Optional[list]) -> Optional[str]:
         ll = line.get('lineLyric')
         if not time:
             continue
-        content.append(f'[{parse_lrc_time(time)}]{ll}')
+        content.append(f'[{parse_lrc_time(time)}]{unescape(ll)}')
     return "\n".join(content)
 
 
