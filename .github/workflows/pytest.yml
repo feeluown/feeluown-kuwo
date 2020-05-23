@@ -24,7 +24,7 @@ jobs:
     - name: Install packages
       run: sudo apt install -y libmpv1
     - name: Install pipenv
-      run: sudo pip install pipenv
+      run: sudo pip3 install pipenv
     - name: Install dependecies
       run: pipenv --python ${{ matrix.python-version }} install -d
     - name: Run tests
