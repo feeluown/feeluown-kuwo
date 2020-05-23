@@ -1,7 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
-name: Python package
+name: Tests
 
 on:
   push:
@@ -15,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
-
+        python-version: [3.6, 3.7, 3.8]
     steps:
     - uses: actions/checkout@v2
     - name: Update
@@ -25,19 +21,9 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Update
-      uses: VaultVulp/action-pipenv@v2.0.1
-      with:
-        command: run pre-install-deps
-    - name: Install libmpv1
-      uses: VaultVulp/action-pipenv@v2.0.1
-      with:
-        command: run install-deps
+    - name: Install packages
+      run: sudo apt install -y libmpv1 pipenv
     - name: Install dependecies
-      uses: VaultVulp/action-pipenv@v2.0.1
-      with:
-        command: install -d
+      run: pipenv install -d
     - name: Run tests
-      uses: VaultVulp/action-pipenv@v2.0.1
-      with:
-        command: run test
+      run: pipenv run test
