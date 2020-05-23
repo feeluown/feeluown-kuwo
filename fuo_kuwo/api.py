@@ -1,3 +1,4 @@
+import ast
 import logging
 
 import time
@@ -42,13 +43,6 @@ class KuwoApi(object, metaclass=Singleton):
         'hq': '320kmp3',
         'sq': '192kmp3',
         'lq': '128kmp3'
-    }
-
-    FORMATS = {
-        'shq': 'AL',
-        'hq': 'MP3H',
-        'sq': 'MP3192',
-        'lq': 'MP3128'
     }
 
     def __init__(self):
@@ -156,6 +150,18 @@ class KuwoApi(object, metaclass=Singleton):
         :return: song detail data
         :rtype: dict
         """
+    def search_v2(self, keyword: str, limit = 20, page = 1, stype: str = 'music') -> dict:
+        uri = KuwoApi.SEARCH_HOST + f'/r.s?ft={stype}&client=kt&all={keyword}&uid=1268191892&loginid=&ver=kwplayer_ip_9.4.6.0' \
+            + f'&cluster=0&strategy=2012&encoding=utf8&rformat=json&vipver=1&mobi=1' \
+            + f'&issubtitle=1&correct=1&pn={page - 1}&rn={limit}&vermerge=1&show_copyright_off=1'
+        with requests.Session() as session:
+            headers = self.headers
+            headers['Host'] = 'search.kuwo.cn'
+            response = session.get(uri, headers=self.mobi_headers)
+            print(response.text)
+            return response.json()
+
+    def get_song_detail(self, rid: int):
         uri = KuwoApi.API_BASE + f'/music/musicInfo?mid={rid}'
         with requests.Session() as session:
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
@@ -177,23 +183,17 @@ class KuwoApi(object, metaclass=Singleton):
             data = response.json()
             return data
 
-    def get_song_url_mobi(self, rid: int, quality: str) -> str:
+    def get_song_url_mobi(self, rid: int, format_: dict) -> str:
         """get song url for app (128/192/320kmp3, flac, app, ...)
 
         :param rid: musicrid
         :type rid: int
-        :param quality: quality of song, choices are lq, sq, shq
-        :type quality: str
+        :param format_: quality of song, choices are lq, sq, shq
+        :type format_: dict
         :return: song url, bitrate, format
         :rtype: str
         """
-        if quality == 'shq':
-            logger.info(f'Querying lossless: {rid} ({quality})')
-            formats = 'ape|flac|mp3|aac'
-        else:
-            logger.info(f'Querying best mp3: {rid} ({quality})')
-            formats = 'mp3|aac'
-        payload = f'corp=kuwo&p2p=1&type=convert_url2&sig=0&format={formats}&rid={rid}'
+        payload = f'corp=kuwo&p2p=1&type=convert_url2&sig=0&format={format_["format"]}&rid={rid}&br={format_["bitrate"]}k{format_["format"]}'
         uri = KuwoApi.MOBI_HOST + '/mobi.s?f=kuwo&q=' + base64_encrypt(payload)
         with requests.Session() as session:
             response = session.get(uri, headers=self.mobi_headers)

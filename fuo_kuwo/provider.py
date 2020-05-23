@@ -26,5 +26,5 @@ class KuwoProvider(AbstractProvider):
 
 provider = KuwoProvider()
 
-from .models import search
-provider.search = search
+from .models import new_search
+provider.search = new_search

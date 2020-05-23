@@ -49,7 +49,7 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
 
     class Meta:
         allow_get = True
-        fields = ['lossless', 'hasmv']
+        fields = ['lossless', 'hasmv', 'formats']
         support_multi_quality = True
 
     def __init__(self, *args, **kwargs):
@@ -103,13 +103,37 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         pass
 
     def list_quality(self):
-        formats = ['shq', 'hq', 'lq']
-        if not self.lossless:
-            formats.remove('shq')
-        return formats
+        logger.info(self.formats)
+        if len(self.formats) == 0:
+            return ['lq']
+        fms = set()
+        for fm in self.formats:
+            if int(fm['bitrate']) >= 1000:
+                fms.add('shq')
+            if 1000 > int(fm['bitrate']) >= 320:
+                fms.add('hq')
+            if 320 > int(fm['bitrate']) >= 192:
+                fms.add('sq')
+        fms.add('lq')
+        return fms
 
     def get_media(self, quality):
-        logger.info(quality)
+
+        def get_br_from_quality():
+            if quality == 'shq':
+                max_bitrate = 99999
+                min_bitrate = 1000
+            if quality == 'hq':
+                max_bitrate = 1000
+                min_bitrate = 320
+            if quality == 'sq':
+                max_bitrate = 320
+                min_bitrate = 192
+            targets = list(filter(lambda x: min_bitrate <= int(x['bitrate']) < max_bitrate, self.formats))
+            if len(targets) == 0:
+                return None
+            return targets[0]
+
         if quality == 'lq':
             return Media(self.url,
                          format=KuwoApi.FORMATS_BRS[quality],
@@ -117,14 +141,15 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         if self._media.get(str(self.identifier)) and self._media.get(str(self.identifier)).get(quality)[0] is not None \
                 and self._media.get(str(self.identifier)).get(quality)[1] > time.time():
             return self._media.get(str(self.identifier)).get(quality)[0]
-        data = self._api.get_song_url_mobi(self.identifier, quality)
-        logger.info(data)
+        data = self._api.get_song_url_mobi(self.identifier, get_br_from_quality())
+        bitrate = 0
         for d in data.split():
+            if 'bitrate' in d:
+                bitrate = int(d.split('=')[-1])
             if 'url' in d:
-                logger.info(d)
                 media = Media(d.split('=')[-1],
                               format=KuwoApi.FORMATS_BRS[quality],
-                              bitrate=KuwoApi.FORMATS_RATES[quality] // 1000)
+                              bitrate=bitrate)
                 self._media[str(self.identifier)] = {}
                 self._media[str(self.identifier)][quality] = (media, int(time.time()) + 60 * 10)
                 return media or None
@@ -324,7 +349,23 @@ def search(keyword: str, **kwargs) -> KuwoSearchModel:
     if type_ == SearchType.pl:
         return search_playlist(keyword)
 
+def new_search(keyword: str, **kwargs) -> KuwoSearchModel:
+    type_ = SearchType.parse(kwargs['type_'])
+    if type_ == SearchType.so:
+        stype, schema = STYPE_MAP.get(type_)
+        datas = provider.api.search_v2(keyword, 20, 1, stype)
+        songs = []
+        for data in datas['abslist']:
+            item = _deserialize(data, schema)
+            songs.append(item)
+        return KuwoSearchModel(songs=songs)
+
 
 from .schemas import (
-    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema,
+    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema, KuwoSongSchemaV2
 )
+
+
+STYPE_MAP = {
+    SearchType.so: ('music', KuwoSongSchemaV2)
+}
