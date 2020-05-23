@@ -13,9 +13,6 @@ feeluown-kuwo = {editable = true,path = "."}
 asyncqt = "*"
 pyqt5 = "*"
 
-[requires]
-python_version = "3.8"
-
 [scripts]
 test = "pytest -v --ignore-glob='*_api.py'"
 test-all = "pytest -v"

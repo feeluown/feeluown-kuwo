@@ -26,6 +26,6 @@ jobs:
     - name: Install pipenv
       run: sudo pip install pipenv
     - name: Install dependecies
-      run: pipenv install -d
+      run: pipenv --python ${{ matrix.python-version }} install -d
     - name: Run tests
       run: pipenv run test
