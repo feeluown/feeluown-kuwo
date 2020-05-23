@@ -4,3 +4,4 @@ __pycache__
 /feeluown_kuwo.egg-info
 /build
 /dist
+/Pipfile.lock
