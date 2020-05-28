@@ -106,6 +106,7 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         formats = ['shq', 'hq', 'lq']
         if not self.lossless:
             formats.remove('shq')
+        logger.info(formats)
         return formats
 
     def get_media(self, quality):
@@ -118,13 +119,16 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
                 and self._media.get(str(self.identifier)).get(quality)[1] > time.time():
             return self._media.get(str(self.identifier)).get(quality)[0]
         data = self._api.get_song_url_mobi(self.identifier, quality)
-        logger.info(data)
+        bitrate = 0
         for d in data.split():
-            if 'url' in d:
-                logger.info(d)
+            if 'bitrate=' in d:
+                bitrate = int(d.split('=')[-1])
+            if 'url=' in d:
+                if bitrate == 0:
+                    bitrate = int(KuwoApi.FORMATS_RATES[quality] // 1000)
                 media = Media(d.split('=')[-1],
                               format=KuwoApi.FORMATS_BRS[quality],
-                              bitrate=KuwoApi.FORMATS_RATES[quality] // 1000)
+                              bitrate=bitrate)
                 self._media[str(self.identifier)] = {}
                 self._media[str(self.identifier)][quality] = (media, int(time.time()) + 60 * 10)
                 return media or None
