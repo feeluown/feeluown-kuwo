@@ -1,7 +1,7 @@
 # *-- coding: utf-8 --*
 __alias__ = '酷我音乐'
 __feeluown_version__ = '3.1'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __desc__ = __alias__
 __identifier__ = 'kuwo'
 

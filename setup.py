@@ -1,10 +1,9 @@
 from setuptools import setup
 
-from fuo_kuwo import __version__
 
 setup(
     name='fuo_kuwo',
-    version=__version__,
+    version='0.1.1',
     packages=['fuo_kuwo', 'fuo_kuwo.enc'],
     url='https://github.com/BruceZhang1993/feeluown-kuwo',
     license='GPL',
