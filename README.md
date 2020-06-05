@@ -10,3 +10,10 @@
 `pytest -v`
 
 test_kuwo_api.py -- Kuwo API tests
+
+## Changelog
+
+### v0.1 (2020-06-05)
+* support fetching song/artist/album/playlist detail
+* support searching 
+
