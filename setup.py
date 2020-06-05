@@ -3,7 +3,7 @@ from setuptools import setup
 from fuo_kuwo import __version__
 
 setup(
-    name='feeluown_kuwo',
+    name='fuo_kuwo',
     version=__version__,
     packages=['fuo_kuwo', 'fuo_kuwo.enc'],
     url='https://github.com/BruceZhang1993/feeluown-kuwo',
