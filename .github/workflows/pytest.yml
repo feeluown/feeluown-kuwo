@@ -8,13 +8,19 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8]
     steps:
     - uses: actions/checkout@v2
+    - name: Cache pipenv files
+      uses: actions/cache@v1
+      env:
+        cache_name: cache-pipenv-files
+      with:
+        path: ~/.pipenv_cache
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ matrix.python-version }}
     - name: Update
       run: sudo apt update
     - name: Set up Python ${{ matrix.python-version }}
@@ -27,5 +33,7 @@ jobs:
       run: sudo pip3 install pipenv
     - name: Install dependecies
       run: pipenv --python ${{ matrix.python-version }} install -d --pypi-mirror https://pypi.org/simple/
+      env:
+        PIP_CACHE_DIR: ~/.pipenv_cache
     - name: Run tests
       run: pipenv run test
