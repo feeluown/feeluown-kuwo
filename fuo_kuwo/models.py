@@ -4,11 +4,33 @@ import time
 from fuocore.media import Media
 from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
     SearchType, PlaylistModel
+from fuocore.reader import SequentialReader
 
 from .api import KuwoApi
 from .provider import provider
 
 logger = logging.getLogger(__name__)
+
+
+def create_g(func, identifier, schema, list_key='list'):
+    data = func(identifier, page=1).get('data')
+    total = int(data['total'])
+
+    def g():
+        nonlocal data
+        if data is None:
+            yield from ()
+        else:
+            page = 1
+            while data[list_key]:
+                obj_data_list = data[list_key]
+                for obj_data in obj_data_list:
+                    obj = _deserialize(obj_data, schema, gotten=False)
+                    yield obj
+                page += 1
+                data = func(identifier, page).get('data', {})
+
+    return SequentialReader(g(), total)
 
 
 def _deserialize(data, schema_class, gotten=True):
@@ -148,36 +170,7 @@ class KuwoArtistModel(ArtistModel, KuwoBaseModel):
         return _deserialize(data.get('data'), KuwoArtistSchema)
 
     def create_songs_g(self):
-        limit = 20
-        page = 1
-        data = self._api.get_artist_songs(self.identifier, page=page, limit=limit)
-        if data.get('code') != 200:
-            yield from ()
-        else:
-            while True:
-                for song in data.get('data', {}).get('list', []):
-                    yield _deserialize(song, KuwoSongSchema)
-                if len(data.get('data', {}).get('list', [])) >= limit:
-                    page += 1
-                    data = self._api.get_artist_songs(self.identifier, page=page, limit=limit)
-                else:
-                    break
-
-    def create_albums_g(self):
-        limit = 20
-        page = 1
-        data = self._api.get_artist_albums(self.identifier, page=page, limit=limit)
-        if data.get('code') != 200:
-            yield from ()
-        else:
-            while True:
-                for album in data.get('data', {}).get('albumList', []):
-                    yield _deserialize(album, KuwoAlbumSchema)
-                if len(data.get('data', {}).get('albumList', [])) >= limit:
-                    page += 1
-                    data = self._api.get_artist_albums(self.identifier, page=page, limit=limit)
-                else:
-                    break
+        return create_g(self._api.get_artist_songs, self.identifier, KuwoSongSchema)
 
     @property
     def desc(self):
@@ -261,20 +254,7 @@ class KuwoPlaylistModel(PlaylistModel, KuwoBaseModel):
         return _deserialize(data_album.get('data'), KuwoPlaylistSchema)
 
     def create_songs_g(self):
-        limit = 20
-        page = 1
-        data = self._api.get_playlist_info(self.identifier, page=page, limit=limit)
-        if data.get('code') != 200:
-            yield from ()
-        else:
-            while True:
-                for album in data.get('data', {}).get('musicList', []):
-                    yield _deserialize(album, KuwoSongSchema)
-                if len(data.get('data', {}).get('musicList', [])) >= limit:
-                    page += 1
-                    data = self._api.get_playlist_info(self.identifier, page=page, limit=limit)
-                else:
-                    break
+        return create_g(self._api.get_playlist_info, self.identifier, KuwoSongSchema, list_key='musicList')
 
 
 class KuwoSearchModel(SearchModel, KuwoBaseModel):
