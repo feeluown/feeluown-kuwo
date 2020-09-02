@@ -25,10 +25,10 @@ def create_g(func, identifier, schema, list_key='list'):
             while data[list_key]:
                 obj_data_list = data[list_key]
                 for obj_data in obj_data_list:
-                    obj = _deserialize(obj_data, schema, gotten=False)
+                    obj = _deserialize(obj_data, schema, gotten=True)
                     yield obj
                 page += 1
-                data = func(identifier, page).get('data', {})
+                data = func(identifier, page=page).get('data', {})
 
     return SequentialReader(g(), total)
 
@@ -171,6 +171,9 @@ class KuwoArtistModel(ArtistModel, KuwoBaseModel):
 
     def create_songs_g(self):
         return create_g(self._api.get_artist_songs, self.identifier, KuwoSongSchema)
+
+    def create_albums_g(self):
+        return create_g(self._api.get_artist_albums, self.identifier, KuwoAlbumSchema, 'albumList')
 
     @property
     def desc(self):
