@@ -3,9 +3,7 @@
 ## Installation
 
 ### Arch Linux
-`yay -S feeluown-kuwo` (Replace yay with your favorite AUR manager)
-
-Included in [Arch Linux CN Repository](https://www.archlinuxcn.org/archlinux-cn-repo-and-mirror/).
+`pacman -S feeluown-kuwo`
 
 ### Install from pypi
 `pip install --user feeluown-kuwo`
