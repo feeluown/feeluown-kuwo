@@ -11,7 +11,7 @@ setup(
     author_email='zttt183525594@gmail.com',
     description='Kuwo music provider for FeelUOwn music player',
     keywords=['feeluown', 'plugin', 'kuwo'],
-    classifiers=(
+    classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
@@ -19,7 +19,7 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3 :: Only',
-    ),
+    ],
     install_requires=[
         'feeluown>=3.4',
         'requests',
