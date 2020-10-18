@@ -21,6 +21,9 @@ test_kuwo_api.py -- Kuwo API tests
 
 ## Changelog
 
+### v0.1.2 (2020-10-18)
+* 使用 SequentialReader
+
 ### v0.1.1 (2020-06-05)
 * fix the issue that fuo-kuwo can't be installed without install_requries
 
