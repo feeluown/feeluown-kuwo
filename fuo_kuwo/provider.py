@@ -14,6 +14,15 @@ class KuwoProvider(AbstractProvider):
     def __init__(self):
         super().__init__()
         self.api = KuwoApi()
+        self._user = None
+
+    @property
+    def user(self):
+        return self._user
+
+    @user.setter
+    def user(self, user):
+        self._user = user
 
     @property
     def name(self) -> str:
@@ -27,4 +36,5 @@ class KuwoProvider(AbstractProvider):
 provider = KuwoProvider()
 
 from .models import search
+
 provider.search = search

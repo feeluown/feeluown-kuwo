@@ -27,6 +27,7 @@ class KuwoApi(object, metaclass=Singleton):
     M_HOST: str = 'http://m.kuwo.cn'
     SEARCH_HOST: str = 'http://search.kuwo.cn'
     LOGIN_HOST: str = 'http://ar.i.kuwo.cn/US_NEW/kuwo'
+    PLAYLIST_BASE: str = 'http://nplserver.kuwo.cn/pl.svc'
     token: str
     cookie: RequestsCookieJar
 
@@ -66,6 +67,9 @@ class KuwoApi(object, metaclass=Singleton):
         self.mobi_headers = {'User-Agent': 'okhttp/3.10.0'}
         self.get_cookie_token()
         self.headers['csrf'] = self.token
+        self._userid = ''
+        self._sid = ''
+        self._cookies = {}
 
     def get_cookie_token(self):
         """get kuwo token & set cookie jar"""
@@ -75,6 +79,36 @@ class KuwoApi(object, metaclass=Singleton):
             token = response.cookies.get('kw_token')
             self.token = token
             self.cookie = response.cookies
+
+    def set_cookies(self, cookies):
+        if cookies:
+            self._cookies = cookies
+            self._userid, self._sid = self.get_user_from_cookies(cookies)
+        else:
+            self._cookies, self._userid, self._sid = {}, '', ''
+
+    @staticmethod
+    def get_user_from_cookies(cookies):
+        userid = str(cookies.get('userid', ''))
+        sid = str(cookies.get('sid', ''))
+        if '_' in sid:
+            sid = sid.split('_')[0]
+        t3 = str(cookies.get('t3'))
+        if t3.lower() in ['qq', 'weibo']:
+            sid = str(cookies.get('websid', ''))
+        return userid, sid
+
+    def get_user_playlists(self):
+        uri = KuwoApi.PLAYLIST_BASE
+        params = {
+            'op': 'getlistbyuid',
+            'bigid': 1,
+            'uid': self._userid,
+        }
+        with requests.Session() as session:
+            response = session.get(uri, params=params, headers=self.mobi_headers)
+            data = response.json()
+            return data
 
     def search(self, keyword: str, limit=20, page=1) -> dict:
         """kuwo web search API

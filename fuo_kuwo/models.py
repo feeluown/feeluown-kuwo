@@ -3,7 +3,7 @@ import time
 
 from fuocore.media import Media
 from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
-    SearchType, PlaylistModel
+    SearchType, PlaylistModel, UserModel, cached_field
 from fuocore.reader import SequentialReader
 
 from .api import KuwoApi
@@ -264,6 +264,22 @@ class KuwoSearchModel(SearchModel, KuwoBaseModel):
     pass
 
 
+class KuwoUserModel(UserModel, KuwoBaseModel):
+    class Meta:
+        fields_no_get = ['name', 'fav_playlists', 'fav_songs',
+                         'fav_albums', 'fav_artists', 'rec_songs', 'rec_playlists']
+
+    @classmethod
+    def get(cls, identifier):
+        return _deserialize({'id': identifier}, KuwoUserSchema)
+
+    @cached_field(ttl=5)
+    def playlists(self):
+        data = self._api.get_user_playlists()
+        data_playlists = data.get('plist', [])
+        return [_deserialize(data_playlist, KuwoUserPlaylistSchema) for data_playlist in data_playlists]
+
+
 def search_song(keyword: str):
     data_songs = provider.api.search(keyword)
     songs = []
@@ -313,5 +329,5 @@ def search(keyword: str, **kwargs) -> KuwoSearchModel:
 
 
 from .schemas import (
-    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema,
+    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema, KuwoUserSchema, KuwoUserPlaylistSchema,
 )
