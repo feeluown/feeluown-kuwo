@@ -9,9 +9,10 @@ pytest = "*"
 [packages]
 feeluown = {extras = ["battery"],version = "*"}
 marshmallow = "*"
-feeluown-kuwo = {editable = true,path = "."}
 asyncqt = "*"
 pyqt5 = "*"
+feeluown-kuwo = {editable = true, path = "."}
+fuo-kuwo = "*"
 
 [scripts]
 test = "pytest -v --ignore-glob='*_api.py'"
