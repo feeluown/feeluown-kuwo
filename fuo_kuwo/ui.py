@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 
 from feeluown.consts import DATA_DIR
 from feeluown.gui.widgets import CookiesLoginDialog
@@ -17,10 +18,12 @@ class KuwoUiManager:
     def __init__(self, app):
         self._app = app
         self._pvd_uimgr: ProviderUiManager = app.pvd_uimgr
-        self._pvd_item = self._pvd_uimgr.create_item(name='kuwo',
-                                                     text=__alias__,
-                                                     symbol='♫ ',
-                                                     desc='点击登录')
+        self._pvd_item = self._pvd_uimgr.create_item(
+            name='kuwo',
+            text=__alias__,
+            symbol='♫ ',
+            desc='点击登录',
+            colorful_svg=str(Path(__file__).resolve().parent / 'assets' / 'icon.svg'))
         self._pvd_item.clicked.connect(self.login_or_show)
         self._pvd_uimgr.add_item(self._pvd_item)
 

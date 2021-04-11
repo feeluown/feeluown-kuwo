@@ -5,6 +5,9 @@ setup(
     name='fuo_kuwo',
     version='0.1.2',
     packages=['fuo_kuwo', 'fuo_kuwo.enc'],
+    package_data={
+        '': ['assets/*.svg']
+    },
     url='https://github.com/BruceZhang1993/feeluown-kuwo',
     license='GPL',
     author='BruceZhang1993',
