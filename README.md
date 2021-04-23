@@ -21,6 +21,11 @@ test_kuwo_api.py -- Kuwo API tests
 
 ## Changelog
 
+### v0.1.3 (2021-04-23)
+* 加了个图标
+* 支持网页登录
+* 支持加载个人收藏的播放列表
+
 ### v0.1.2 (2020-10-18)
 * 使用 SequentialReader
 
