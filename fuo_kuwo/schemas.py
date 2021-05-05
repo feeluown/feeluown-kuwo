@@ -25,13 +25,13 @@ class KuwoSongSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        artists = [KuwoArtistModel(identifier=data.get('artistid'), name=data.get('artist'))] \
+        artists = [KuwoArtistModel(identifier=data.get('artistid'), name=unescape(data.get('artist')))] \
             if data.get('artistid') else []
-        album = KuwoAlbumModel(identifier=data.get('albumid'), name=data.get('album'),
+        album = KuwoAlbumModel(identifier=data.get('albumid'), name=unescape(data.get('album')),
                                cover=data.get('albumpic', '')) if data.get('albumid') else None
         return KuwoSongModel(identifier=data.get('identifier'),
                              duration=data.get('duration') * 1000,
-                             title=data.get('title'),
+                             title=unescape(data.get('title')),
                              artists=artists,
                              album=album,
                              lossless=data.get('lossless', False),
@@ -50,7 +50,7 @@ class KuwoAlbumSchema(Schema):
     @post_load
     def create_model(self, data, **kwargs):
         return KuwoAlbumModel(identifier=data.get('identifier'), name=unescape(data.get('name')),
-                              artists=[KuwoArtistModel(identifier=data.get('artistid'), name=data.get('artist'))],
+                              artists=[KuwoArtistModel(identifier=data.get('artistid'), name=unescape(data.get('artist')))],
                               desc=unescape(data.get('albuminfo', '')).replace('\n', '<br>'), cover=data.get('cover'),
                               songs=[],
                               _songs=data.get('songs'))
@@ -79,7 +79,7 @@ class KuwoPlaylistSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoPlaylistModel(identifier=data.get('identifier'), name=data.get('name'), cover=data.get('cover'),
+        return KuwoPlaylistModel(identifier=data.get('identifier'), name=unescape(data.get('name')), cover=data.get('cover'),
                                  desc=data.get('desc'), songs=data.get('songs'))
 
 
@@ -90,7 +90,7 @@ class KuwoUserPlaylistSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoPlaylistModel(identifier=data.get('identifier'), name=data.get('name'), cover=data.get('cover'),
+        return KuwoPlaylistModel(identifier=data.get('identifier'), name=unescape(data.get('name')), cover=data.get('cover'),
                                  desc='', songs=None)
 
 
