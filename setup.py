@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='fuo_kuwo',
-    version='0.1.3',
+    version='0.1.4',
     packages=['fuo_kuwo', 'fuo_kuwo.enc'],
     package_data={
         '': ['assets/*.svg']

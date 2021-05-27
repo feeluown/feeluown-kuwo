@@ -21,6 +21,9 @@ test_kuwo_api.py -- Kuwo API tests
 
 ## Changelog
 
+### v0.1.4 (2021-05-27)
+* 处理 html 字符实体
+
 ### v0.1.3 (2021-04-23)
 * 加了个图标
 * 支持网页登录
