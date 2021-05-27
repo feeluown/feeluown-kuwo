@@ -8,7 +8,7 @@ setup(
     package_data={
         '': ['assets/*.svg']
     },
-    url='https://github.com/BruceZhang1993/feeluown-kuwo',
+    url='https://github.com/feeluown/feeluown-kuwo',
     license='GPL',
     author='BruceZhang1993',
     author_email='zttt183525594@gmail.com',
