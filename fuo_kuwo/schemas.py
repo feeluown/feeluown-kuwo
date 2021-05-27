@@ -1,6 +1,22 @@
-from html import unescape
+import unicodedata
+import html
 
 from marshmallow import Schema, fields, post_load, EXCLUDE
+
+
+def normalize_str(s):
+    # String returned from kuwo server may contain charactor
+    # which is supposed to normalized.
+    #
+    # For example, there may be '&nbsp' in album name, which is
+    # expected to normalized to whitespace.
+    return unicodedata.normalize('NFKC', html.unescape(s))
+
+
+def normalize_field(s):
+    if s is None:
+        return ''
+    return normalize_str(s)
 
 
 class BaseSchema(Schema):
@@ -25,13 +41,24 @@ class KuwoSongSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        artists = [KuwoArtistModel(identifier=data.get('artistid'), name=unescape(data.get('artist')))] \
-            if data.get('artistid') else []
-        album = KuwoAlbumModel(identifier=data.get('albumid'), name=unescape(data.get('album')),
-                               cover=data.get('albumpic', '')) if data.get('albumid') else None
+        if data.get('artistid'):
+            artists = [
+                KuwoArtistModel(
+                    identifier=data.get('artistid'),
+                    name=normalize_field(data.get('artist'))
+                )
+            ]
+        else:
+            artists = []
+        if data.get('albumid'):
+            album = KuwoAlbumModel(identifier=data.get('albumid'),
+                                   name=normalize_field(data.get('album')),
+                                   cover=data.get('albumpic', ''))
+        else:
+            album = None
         return KuwoSongModel(identifier=data.get('identifier'),
                              duration=data.get('duration') * 1000,
-                             title=unescape(data.get('title')),
+                             title=normalize_field(data.get('title')),
                              artists=artists,
                              album=album,
                              lossless=data.get('lossless', False),
@@ -45,15 +72,23 @@ class KuwoAlbumSchema(Schema):
     artist = fields.Str(data_key='artist', required=True)
     artistid = fields.Int(data_key='artistid', required=True)
     albuminfo = fields.Str(data_key='albuminfo', required=False)
-    songs = fields.List(fields.Nested('KuwoSongSchema'), data_key='musicList', allow_none=True, required=False)
+    songs = fields.List(fields.Nested('KuwoSongSchema'),
+                        data_key='musicList',
+                        allow_none=True, required=False)
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoAlbumModel(identifier=data.get('identifier'), name=unescape(data.get('name')),
-                              artists=[KuwoArtistModel(identifier=data.get('artistid'), name=unescape(data.get('artist')))],
-                              desc=unescape(data.get('albuminfo', '')).replace('\n', '<br>'), cover=data.get('cover'),
-                              songs=[],
-                              _songs=data.get('songs'))
+        return KuwoAlbumModel(
+            identifier=data.get('identifier'),
+            name=normalize_field(data.get('name')),
+            artists=[KuwoArtistModel(
+                identifier=data.get('artistid'),
+                name=normalize_field(data.get('artist')))],
+            desc=normalize_field(data.get('albuminfo', '')).replace('\n', '<br>'),
+            cover=data.get('cover'),
+            songs=[],
+            _songs=data.get('songs')
+        )
 
 
 class KuwoArtistSchema(Schema):
@@ -65,9 +100,12 @@ class KuwoArtistSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoArtistModel(identifier=data.get('identifier'), name=unescape(data.get('name')),
-                               cover=data.get('pic300'),
-                               desc=data.get('desc'), info=data.get('desc'))
+        return KuwoArtistModel(
+            identifier=data.get('identifier'),
+            name=normalize_field(data.get('name')),
+            cover=data.get('pic300'),
+            desc=data.get('desc'), info=data.get('desc')
+        )
 
 
 class KuwoPlaylistSchema(Schema):
@@ -75,12 +113,20 @@ class KuwoPlaylistSchema(Schema):
     cover = fields.Str(data_key='img', required=False)
     name = fields.Str(data_key='name', required=True)
     desc = fields.Str(data_key='info', required=False)
-    songs = fields.List(fields.Nested('KuwoSongSchema'), data_key='musicList', allow_none=True, required=False)
+    songs = fields.List(fields.Nested('KuwoSongSchema'),
+                        data_key='musicList',
+                        allow_none=True,
+                        required=False)
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoPlaylistModel(identifier=data.get('identifier'), name=unescape(data.get('name')), cover=data.get('cover'),
-                                 desc=data.get('desc'), songs=data.get('songs'))
+        return KuwoPlaylistModel(
+            identifier=data.get('identifier'),
+            name=normalize_field(data.get('name')),
+            cover=data.get('cover'),
+            desc=data.get('desc'),
+            songs=data.get('songs')
+        )
 
 
 class KuwoUserPlaylistSchema(Schema):
@@ -90,8 +136,13 @@ class KuwoUserPlaylistSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoPlaylistModel(identifier=data.get('identifier'), name=unescape(data.get('name')), cover=data.get('cover'),
-                                 desc='', songs=None)
+        return KuwoPlaylistModel(
+            identifier=data.get('identifier'),
+            name=normalize_field(data.get('name')),
+            cover=data.get('cover'),
+            desc='',
+            songs=None
+        )
 
 
 class KuwoUserSchema(Schema):
@@ -99,7 +150,9 @@ class KuwoUserSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoUserModel(identifier=data.get('identifier', ''))
+        return KuwoUserModel(
+            identifier=data.get('identifier', '')
+        )
 
 
 from .models import KuwoSongModel, KuwoArtistModel, KuwoAlbumModel, KuwoPlaylistModel, KuwoUserModel
