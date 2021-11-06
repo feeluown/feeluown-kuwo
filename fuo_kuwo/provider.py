@@ -1,6 +1,6 @@
 import logging
 
-from fuocore.provider import AbstractProvider
+from feeluown.library.provider import AbstractProvider
 
 from . import __identifier__, __alias__
 from .api import KuwoApi

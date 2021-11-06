@@ -1,10 +1,10 @@
 import logging
 import time
 
-from fuocore.media import Media
-from fuocore.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
+from feeluown.media import Media
+from feeluown.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
     SearchType, PlaylistModel, UserModel, cached_field
-from fuocore.reader import SequentialReader
+from feeluown.utils.reader import SequentialReader
 
 from .api import KuwoApi
 from .provider import provider

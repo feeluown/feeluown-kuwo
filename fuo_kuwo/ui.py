@@ -6,7 +6,7 @@ from feeluown.consts import DATA_DIR
 from feeluown.gui.widgets import CookiesLoginDialog
 from feeluown.gui.widgets.login import InvalidCookies
 from feeluown.uimodels.provider import ProviderUiManager
-from fuocore import aio
+from feeluown.utils import aio
 
 from . import __alias__
 from .provider import provider
