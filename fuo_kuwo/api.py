@@ -1,10 +1,12 @@
 import logging
 
 import time
+from pathlib import Path
+
 import requests
 from requests.cookies import RequestsCookieJar
 from fuo_kuwo.enc.DES import base64_encrypt
-from .utils import digest_encrypt
+from fuo_kuwo.utils import digest_encrypt
 
 logger = logging.getLogger(__name__)
 
@@ -357,3 +359,101 @@ class KuwoApi(object, metaclass=Singleton):
         with requests.Session() as session:
             response = session.post(uri, headers=self.mobi_headers)
             return response.text
+
+    def radio_list(self) -> dict:
+        """
+        音乐电台
+        :return:
+        """
+        uri = KuwoApi.API_BASE + f'/radio/index/radioList?&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def rank_index(self) -> dict:
+        """
+        榜单
+        :return:
+        """
+        uri = KuwoApi.API_BASE + f'/bang/bang/bangMenu?&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def rank_music(self, bid: int, limit=20, page=1) -> dict:
+        """
+        榜单歌曲
+        :param bid:
+        :param limit:
+        :param page:
+        :return:
+        """
+        uri = KuwoApi.API_BASE + f'/bang/bang/musicList?bangId={bid}&pn={page}&rn={limit}&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def rank_top(self):
+        """
+        推荐榜单
+        :return:
+        """
+        uri = KuwoApi.API_BASE + f'/bang/index/bangList?&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def playlist_recommend(self, limit=20, page=1) -> dict:
+        """
+        推荐歌单
+        :param limit:
+        :param page:
+        :return:
+        """
+        uri = KuwoApi.API_BASE + f'/rcm/index/playlist?id=rec&pn={page}&rn={limit}&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def banner(self) -> dict:
+        """
+        首页轮播图
+        :return:
+        """
+        uri = KuwoApi.API_BASE + f'/banner/index/bannerList?&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def comment(self, sid: int, type_: str, digest_: int, limit=20, page=1) -> dict:
+        """
+        评论
+        :param sid:
+        :param type_: get_rec_comment 热门评论 get_comment 最新评论
+        :param digest_: 15 歌曲 2 排行榜 7 mv评论 8 歌单评论
+        :param limit:
+        :param page:
+        :return:
+        """
+        uri = f'http://www.kuwo.cn/comment?type={type_}&f=web&page=${page}&rows=${limit}&digest=${digest_}&sid=${sid}' \
+              f'&uid=&prod=newWeb&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    @staticmethod
+    def write_text_to_example(response: requests.Response, file_name: str):
+        path = Path(__file__).parent.parent / 'examples' / f'{file_name}.json'
+        with path.open('w', encoding='utf-8') as f:
+            f.write(response.text)
+
+
+if __name__ == '__main__':
+    print(KuwoApi().comment(sid=80958029, type_='get_rec_comment', digest_=15, limit=20, page=1))
