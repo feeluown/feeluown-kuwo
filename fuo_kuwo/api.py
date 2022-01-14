@@ -448,6 +448,31 @@ class KuwoApi(object, metaclass=Singleton):
             data = response.json()
             return data
 
+    def artists_recommend(self, category: int, limit=20, page=1) -> dict:
+        """
+        推荐歌手
+        :param category: 11 華語  13 歐美  12 日韓 16 組合
+        :param limit:
+        :param page:
+        :return:
+        """
+        uri = KuwoApi.API_BASE + f'/artist/artistInfo?category={category}&pn={page}&rn={limit}&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
+    def playlist_tags(self) -> dict:
+        """
+        歌单标签
+        :return:
+        """
+        uri = KuwoApi.API_BASE + f'/playlist/getTagList?&httpsStatus=1'
+        with requests.Session() as session:
+            response = session.get(uri, cookies=self.cookie, headers=self.headers)
+            data = response.json()
+            return data
+
     @staticmethod
     def write_text_to_example(response: requests.Response, file_name: str):
         path = Path(__file__).parent.parent / 'examples' / f'{file_name}.json'
@@ -456,4 +481,4 @@ class KuwoApi(object, metaclass=Singleton):
 
 
 if __name__ == '__main__':
-    print(KuwoApi().comment(sid=80958029, type_='get_rec_comment', digest_=15, limit=20, page=1))
+    print(KuwoApi().playlist_tags())
