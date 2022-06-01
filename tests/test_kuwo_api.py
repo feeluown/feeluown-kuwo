@@ -24,7 +24,13 @@ class TestKuwoApi:
         response = KuwoApi().get_song_url(95828238)
         assert isinstance(response, dict)
         assert response.get('code') == 200
-        assert 'url' in response
+        assert 'url' in response.get('data')
+
+    def test_kuwoapi_song_mv(self):
+        response = KuwoApi().get_song_mv(89626)
+        assert isinstance(response, dict)
+        assert response.get('code') == 200
+        assert 'url' in response.get('data')
 
     def test_kuwoapi_song_url_rates(self):
         response = KuwoApi().get_song_url_mobi(95828238, 'shq')
