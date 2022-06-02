@@ -87,8 +87,8 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         if self._url is not None and self._expired_at > time.time():
             return self._url
         data = self._api.get_song_url(self.identifier)
-        logger.info(data.get('url'))
-        self._url = data.get('url', '')
+        logger.debug(data.get('data', {}).get('url'))
+        self._url = data.get('data', {}).get('url')
         return self._url
 
     @url.setter
@@ -104,7 +104,7 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         if self.album and self.album.cover:
             cover = self.album.cover
         return KuwoMvModel(name=self.title, desc='', cover=cover, artist=self.artists_name,
-                           media=self._api.get_song_mv(self.identifier) or '')
+                           media=self._api.get_song_mv(self.identifier).get('data', {}).get('url'))
 
     @mv.setter
     def mv(self, value):
