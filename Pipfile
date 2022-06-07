@@ -9,10 +9,8 @@ pytest = "*"
 [packages]
 feeluown = {extras = ["battery"],version = "*"}
 marshmallow = "*"
-asyncqt = "*"
 pyqt5 = "*"
-feeluown-kuwo = {editable = true, path = "."}
-fuo-kuwo = "*"
+fuo-kuwo = {editable = true, path = "."}
 requests = "*"
 
 [scripts]
