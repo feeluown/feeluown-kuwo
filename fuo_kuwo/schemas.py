@@ -2,6 +2,10 @@ import unicodedata
 import html
 
 from marshmallow import Schema, fields, post_load, EXCLUDE
+from feeluown.library import BriefAlbumModel, BriefArtistModel, SongModel
+
+
+SOURCE = 'kuwo'
 
 
 def normalize_str(s):
@@ -65,6 +69,50 @@ class KuwoSongSchema(Schema):
                              hasmv=data.get('hasmv', 0))
 
 
+class KuwoSongSchemaV2(Schema):
+    identifier = fields.Int(data_key='rid', required=True)
+    duration = fields.Int(data_key='duration', required=True)
+    title = fields.Str(data_key='name', required=True)
+    artist = fields.Str(data_key='artist', required=True)
+    artistid = fields.Int(data_key='artistid', required=True)
+    album = fields.Str(data_key='album', required=False)
+    albumid = fields.Int(data_key='albumid', required=False)
+    albumpic = fields.Str(data_key='albumpic', required=False)
+    lossless = fields.Bool(data_key='hasLossless', required=False)
+    hasmv = fields.Int(data_key='hasmv', required=False)
+
+    @post_load
+    def create_model(self, data, **kwargs):
+        artists = []
+        album = None
+        if data['artistid']:
+            artists = [
+                BriefArtistModel(
+                    identifier=data['artistid'],
+                    source=SOURCE,
+                    name=normalize_field(data['artist']),
+                )
+            ]
+        if data.get('albumid'):
+            album = BriefAlbumModel(
+                identifier=data['albumid'],
+                source=SOURCE,
+                name=normalize_field(data['album']),
+                artists_name=normalize_field(data['artist']),
+            )
+        song = SongModel(
+            identifier=data['identifier'],
+            source=SOURCE,
+            duration=data['duration'] * 1000,
+            title=normalize_field(data['title']),
+            artists=artists,
+            album=album,
+        )
+        song.cache_set('lossless', data['lossless'])
+        song.cache_set('hasmv', bool(data['hasmv']))
+        return song
+
+
 class KuwoAlbumSchema(Schema):
     identifier = fields.Int(data_key='albumid', required=True)
     name = fields.Str(data_key='album', required=True)
@@ -72,7 +120,7 @@ class KuwoAlbumSchema(Schema):
     artist = fields.Str(data_key='artist', required=True)
     artistid = fields.Int(data_key='artistid', required=True)
     albuminfo = fields.Str(data_key='albuminfo', required=False)
-    songs = fields.List(fields.Nested('KuwoSongSchema'),
+    songs = fields.List(fields.Nested('KuwoSongSchemaV2'),
                         data_key='musicList',
                         allow_none=True, required=False)
 
@@ -113,7 +161,7 @@ class KuwoPlaylistSchema(Schema):
     cover = fields.Str(data_key='img', required=False)
     name = fields.Str(data_key='name', required=True)
     desc = fields.Str(data_key='info', required=False)
-    songs = fields.List(fields.Nested('KuwoSongSchema'),
+    songs = fields.List(fields.Nested('KuwoSongSchemaV2'),
                         data_key='musicList',
                         allow_none=True,
                         required=False)
