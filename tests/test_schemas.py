@@ -14,6 +14,7 @@ class TestSchemas:
                 assert isinstance(song, KuwoSongModel)
                 assert isinstance(song.identifier, int)
                 assert isinstance(song.title, str)
+                assert isinstance(song.lossless, bool)
                 assert isinstance(song.hasmv, int)
                 assert song.hasmv in [0, 1]
                 assert isinstance(song.duration, int)
