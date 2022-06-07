@@ -206,8 +206,7 @@ class KuwoApi(object, metaclass=Singleton):
         :return: song url data
         :rtype: dict
         """
-        uri = KuwoApi.HTTP_HOST + f'/url?format=mp3&rid={rid}&response=url&type=convert_url3&br=128kmp3&from=web&t' \
-                                  '=1589364222048'
+        uri = KuwoApi.HTTP_HOST + f'/api/v1/www/music/playUrl?mid={rid}&type=music&httpsStatus=1'
         with requests.Session() as session:
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
             data = response.json()
@@ -325,18 +324,18 @@ class KuwoApi(object, metaclass=Singleton):
             data = response.json()
             return data
 
-    def get_song_mv(self, rid: int) -> str:
+    def get_song_mv(self, rid: int) -> dict:
         """ kuwo mv url API
 
         :param rid: musicrid
         :type rid: int
         :return: song mv url
-        :rtype: str
+        :rtype: dict
         """
-        uri = KuwoApi.HTTP_HOST + f'/url?rid={rid}&response=url&format=mp4%7Cmkv&type=convert_url&t=1589586895402'
+        uri = KuwoApi.HTTP_HOST + f'/api/v1/www/music/playUrl?mid={rid}&type=mv&httpsStatus=1'
         with requests.Session() as session:
             response = session.get(uri, cookies=self.cookie, headers=self.headers)
-            return response.text
+            return response.json()
 
     def get_song_lyrics(self, rid: int) -> dict:
         """ kuwo song lyrics url

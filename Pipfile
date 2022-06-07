@@ -13,6 +13,7 @@ asyncqt = "*"
 pyqt5 = "*"
 feeluown-kuwo = {editable = true, path = "."}
 fuo-kuwo = "*"
+requests = "*"
 
 [scripts]
 test = "pytest -v --ignore-glob='*_api.py'"
