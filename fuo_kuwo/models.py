@@ -1,5 +1,6 @@
 import logging
 import time
+from collections import defaultdict
 
 from feeluown.media import Media
 from feeluown.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
@@ -65,9 +66,7 @@ class KuwoMvModel(MvModel, KuwoBaseModel):
 
 
 class KuwoSongModel(SongModel, KuwoBaseModel):
-    _url: str
-    _media: dict = {}
-    _expired_at: int
+    _media_info: dict = defaultdict(dict)
 
     class Meta:
         allow_get = True
@@ -82,36 +81,19 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         data = cls._api.get_song_detail(identifier)
         return _deserialize(data.get('data'), KuwoSongSchema)
 
-    @property
-    def url(self):
-        if self._url is not None and self._expired_at > time.time():
-            return self._url
-        data = self._api.get_song_url(self.identifier)
-        logger.debug(data.get('data', {}).get('url'))
-        self._url = data.get('data', {}).get('url')
-        return self._url
-
-    @url.setter
-    def url(self, url):
-        self._expired_at = int(time.time()) + 60 * 10
-        self._url = url
-
-    @property
+    @cached_field(ttl=180)
     def mv(self):
         if self.hasmv != 1:
             return None
         cover = ''
         if self.album and self.album.cover:
             cover = self.album.cover
-        return KuwoMvModel(name=self.title, desc='', cover=cover, artist=self.artists_name,
-                           media=self._api.get_song_mv(self.identifier).get('data', {}).get('url'))
+        return KuwoMvModel(name=self.title,
+                           desc='',
+                           cover=cover,
+                           media=self._api.get_song_mv(self.identifier) or '')
 
-    @mv.setter
-    def mv(self, value):
-        """Leave it empty"""
-        pass
-
-    @property
+    @cached_field()
     def lyric(self):
         data = self._api.get_song_lyrics(self.identifier)
         lyrics: list = data.get('data', {}).get('lrclist', [])
@@ -119,42 +101,53 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         return KuwoLyricModel(identifier=self.identifier,
                               content=parse_lyrics(lyrics))
 
-    @lyric.setter
-    def lyric(self, value):
-        """Leave it empty"""
-        pass
-
     def list_quality(self):
         formats = ['shq', 'hq', 'lq']
-        if not self.lossless:
+        if not self.lossless:  # Note that this may trigger IO.
             formats.remove('shq')
-        logger.info(formats)
         return formats
 
     def get_media(self, quality):
-        logger.info(quality)
+        idstr = str(self.identifier)
+
         if quality == 'lq':
-            return Media(self.url,
+            data = self._api.get_song_url(self.identifier)
+            url = data.get('url')
+            if not url:
+                logger.warning("no song url for 'lq' quality")
+                return None
+            return Media(url,
                          format=KuwoApi.FORMATS_BRS[quality],
                          bitrate=KuwoApi.FORMATS_RATES[quality] // 1000)
-        if self._media.get(str(self.identifier)) and self._media.get(str(self.identifier)).get(quality)[0] is not None \
-                and self._media.get(str(self.identifier)).get(quality)[1] > time.time():
-            return self._media.get(str(self.identifier)).get(quality)[0]
-        data = self._api.get_song_url_mobi(self.identifier, quality)
-        bitrate = 0
-        for d in data.split():
-            if 'bitrate=' in d:
-                bitrate = int(d.split('=')[-1])
-            if 'url=' in d:
-                if bitrate == 0:
-                    bitrate = int(KuwoApi.FORMATS_RATES[quality] // 1000)
-                media = Media(d.split('=')[-1],
-                              format=KuwoApi.FORMATS_BRS[quality],
-                              bitrate=bitrate)
-                self._media[str(self.identifier)] = {}
-                self._media[str(self.identifier)][quality] = (media, int(time.time()) + 60 * 10)
-                return media or None
-        return None
+
+        # Check if media info already exists.
+        media_info = self._media_info.get(idstr)
+        if media_info and quality in media_info:
+            media, life_time = media_info[quality]
+            if life_time > time.time():
+                return media
+
+        # Response example::
+        #   format=ape
+        #   bitrate=1000
+        #   url=http://sq.sycdn.kuwo.cn/xx/yy/zz.ape
+        #   sig=1111111111111
+        text = self._api.get_song_url_mobi(self.identifier, quality)
+        media_data = {}
+        for line in text.split():
+            key, value = line.split('=', 1)
+            media_data[key] = value
+        # Check field value before use it since I'm not sure if the field always exists.
+        if not media_data.get('url'):
+            return None
+        bitrate = int(media_data.get('bitrate', 0))
+        if bitrate == 0:
+            bitrate = KuwoApi.FORMATS_RATES[quality] // 1000
+        media = Media(media_data['url'],
+                      format=KuwoApi.FORMATS_BRS[quality],
+                      bitrate=bitrate)
+        self._media_info[idstr] = {quality: (media, int(time.time()) + 60 * 10)}
+        return media
 
 
 class KuwoArtistModel(ArtistModel, KuwoBaseModel):
