@@ -1,6 +1,7 @@
 import logging
 import time
 from collections import defaultdict
+from feeluown.excs import ProviderIOError
 
 from feeluown.media import Media
 from feeluown.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
@@ -49,6 +50,14 @@ def _deserialize(data, schema_class, gotten=True):
     return obj
 
 
+def _get_data_or_raise(js):
+    """Get data from response json"""
+    data = js.get('data')
+    if not data:
+        raise ProviderIOError(f"resp code is {js.get('code', -1000)}, expect 200")
+    return data
+
+
 class KuwoBaseModel(BaseModel):
     _api: KuwoApi = provider.api
 
@@ -88,10 +97,16 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         cover = ''
         if self.album and self.album.cover:
             cover = self.album.cover
+        js = self._api.get_song_mv(self.identifier)
+        data = _get_data_or_raise(js)
+        url = data.get('url', '')
+        if not url:
+            print(data)
+            logger.warning("song has no valid mv url, but attr 'hasmv' is true")
         return KuwoMvModel(name=self.title,
                            desc='',
                            cover=cover,
-                           media=self._api.get_song_mv(self.identifier) or '')
+                           media=url)
 
     @cached_field()
     def lyric(self):
@@ -111,8 +126,9 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         idstr = str(self.identifier)
 
         if quality == 'lq':
-            data = self._api.get_song_url(self.identifier)
-            url = data.get('url')
+            js = self._api.get_song_url(self.identifier)
+            data = _get_data_or_raise(js)
+            url = data.get('url', '')
             if not url:
                 logger.warning("no song url for 'lq' quality")
                 return None
