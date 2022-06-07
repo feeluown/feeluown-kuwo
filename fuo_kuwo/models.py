@@ -1,10 +1,7 @@
 import logging
-import time
-from collections import defaultdict
 from feeluown.excs import ProviderIOError
 
-from feeluown.media import Media
-from feeluown.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
+from feeluown.models import BaseModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
     SearchType, PlaylistModel, UserModel, cached_field
 from feeluown.utils.reader import SequentialReader
 
@@ -68,52 +65,6 @@ class KuwoBaseModel(BaseModel):
 
 class KuwoLyricModel(LyricModel, BaseModel):
     pass
-
-
-class KuwoMvModel(MvModel, KuwoBaseModel):
-    pass
-
-
-class KuwoSongModel(SongModel, KuwoBaseModel):
-    _media_info: dict = defaultdict(dict)
-
-    class Meta:
-        allow_get = True
-        fields = ['hasmv']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    @classmethod
-    def get(cls, identifier):
-        data = cls._api.get_song_detail(identifier)
-        return _deserialize(data.get('data'), KuwoSongSchema)
-
-    @cached_field(ttl=180)
-    def mv(self):
-        if self.hasmv != 1:
-            return None
-        cover = ''
-        if self.album and self.album.cover:
-            cover = self.album.cover
-        js = self._api.get_song_mv(self.identifier)
-        data = _get_data_or_raise(js)
-        url = data.get('url', '')
-        if not url:
-            print(data)
-            logger.warning("song has no valid mv url, but attr 'hasmv' is true")
-        return KuwoMvModel(name=self.title,
-                           desc='',
-                           cover=cover,
-                           media=url)
-
-    @cached_field()
-    def lyric(self):
-        data = self._api.get_song_lyrics(self.identifier)
-        lyrics: list = data.get('data', {}).get('lrclist', [])
-        from fuo_kuwo.utils import parse_lyrics
-        return KuwoLyricModel(identifier=self.identifier,
-                              content=parse_lyrics(lyrics))
 
 
 class KuwoArtistModel(ArtistModel, KuwoBaseModel):
@@ -296,7 +247,7 @@ def search(keyword: str, **kwargs) -> KuwoSearchModel:
 
 
 from .schemas import (
-    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema,
+    KuwoAlbumSchema, KuwoArtistSchema,
     KuwoPlaylistSchema, KuwoUserSchema, KuwoUserPlaylistSchema,
     KuwoSongSchemaV2,
 )

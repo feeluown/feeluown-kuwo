@@ -1,8 +1,8 @@
 import json
 from urllib.parse import urlparse
 
-from fuo_kuwo.models import _deserialize, KuwoSongModel, KuwoArtistModel, KuwoAlbumModel
-from fuo_kuwo.schemas import KuwoSongSchema, KuwoArtistSchema
+from fuo_kuwo.models import _deserialize
+from fuo_kuwo.schemas import KuwoArtistSchema, KuwoSongSchemaV2
 
 
 class TestSchemas:
@@ -10,17 +10,10 @@ class TestSchemas:
         with open('./examples/search.json', 'r') as f:
             data_songs = json.load(f)
             for data_song in data_songs.get('data', {}).get('list', []):
-                song = _deserialize(data_song, KuwoSongSchema)
-                assert isinstance(song, KuwoSongModel)
-                assert isinstance(song.identifier, int)
+                song = _deserialize(data_song, KuwoSongSchemaV2, v2_model=True)
+                assert isinstance(song.identifier, str)
                 assert isinstance(song.title, str)
-                assert isinstance(song.hasmv, int)
-                assert song.hasmv in [0, 1]
                 assert isinstance(song.duration, int)
-                if song.artists and len(song.artists) > 0:
-                    assert isinstance(song.artists[0], KuwoArtistModel)
-                if song.album:
-                    assert isinstance(song.album, KuwoAlbumModel)
 
     def test_search_artist_schema(self):
         with open('./examples/search_artist.json', 'r') as f:
