@@ -223,10 +223,10 @@ class KuwoApi(object, metaclass=Singleton):
         :rtype: str
         """
         if quality == 'shq':
-            logger.info(f'Querying lossless: {rid} ({quality})')
+            logger.debug(f'Querying lossless: {rid} ({quality})')
             formats = 'ape|flac|mp3|aac'
         else:
-            logger.info(f'Querying best mp3: {rid} ({quality})')
+            logger.debug(f'Querying best mp3: {rid} ({quality})')
             formats = 'mp3|aac'
         payload = f'corp=kuwo&p2p=1&type=convert_url2&sig=0&format={formats}&rid={rid}'
         uri = KuwoApi.MOBI_HOST + '/mobi.s?f=kuwo&q=' + base64_encrypt(payload)
