@@ -14,7 +14,7 @@ from .provider import provider
 logger = logging.getLogger(__name__)
 
 
-def create_g(func, identifier, schema, list_key='list'):
+def create_g(func, identifier, schema, list_key='list', v2_model=False):
     data = func(identifier, page=1).get('data')
     total = int(data['total'])
 
@@ -27,7 +27,7 @@ def create_g(func, identifier, schema, list_key='list'):
             while data[list_key]:
                 obj_data_list = data[list_key]
                 for obj_data in obj_data_list:
-                    obj = _deserialize(obj_data, schema, gotten=True)
+                    obj = _deserialize(obj_data, schema, gotten=True, v2_model=v2_model)
                     yield obj
                 page += 1
                 data = func(identifier, page=page).get('data', {})
@@ -35,7 +35,7 @@ def create_g(func, identifier, schema, list_key='list'):
     return SequentialReader(g(), total)
 
 
-def _deserialize(data, schema_class, gotten=True):
+def _deserialize(data, schema_class, gotten=True, v2_model=False):
     """ deserialize schema data to model
 
     :param data: data to be deserialize
@@ -45,7 +45,7 @@ def _deserialize(data, schema_class, gotten=True):
     """
     schema = schema_class()
     obj = schema.load(data)
-    if gotten:
+    if v2_model is False and gotten:
         obj.stage = ModelStage.gotten
     return obj
 
@@ -79,8 +79,7 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
 
     class Meta:
         allow_get = True
-        fields = ['lossless', 'hasmv']
-        support_multi_quality = True
+        fields = ['hasmv']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -116,55 +115,6 @@ class KuwoSongModel(SongModel, KuwoBaseModel):
         return KuwoLyricModel(identifier=self.identifier,
                               content=parse_lyrics(lyrics))
 
-    def list_quality(self):
-        formats = ['shq', 'hq', 'lq']
-        if not self.lossless:  # Note that this may trigger IO.
-            formats.remove('shq')
-        return formats
-
-    def get_media(self, quality):
-        idstr = str(self.identifier)
-
-        if quality == 'lq':
-            js = self._api.get_song_url(self.identifier)
-            data = _get_data_or_raise(js)
-            url = data.get('url', '')
-            if not url:
-                logger.warning("no song url for 'lq' quality")
-                return None
-            return Media(url,
-                         format=KuwoApi.FORMATS_BRS[quality],
-                         bitrate=KuwoApi.FORMATS_RATES[quality] // 1000)
-
-        # Check if media info already exists.
-        media_info = self._media_info.get(idstr)
-        if media_info and quality in media_info:
-            media, life_time = media_info[quality]
-            if life_time > time.time():
-                return media
-
-        # Response example::
-        #   format=ape
-        #   bitrate=1000
-        #   url=http://sq.sycdn.kuwo.cn/xx/yy/zz.ape
-        #   sig=1111111111111
-        text = self._api.get_song_url_mobi(self.identifier, quality)
-        media_data = {}
-        for line in text.split():
-            key, value = line.split('=', 1)
-            media_data[key] = value
-        # Check field value before use it since I'm not sure if the field always exists.
-        if not media_data.get('url'):
-            return None
-        bitrate = int(media_data.get('bitrate', 0))
-        if bitrate == 0:
-            bitrate = KuwoApi.FORMATS_RATES[quality] // 1000
-        media = Media(media_data['url'],
-                      format=KuwoApi.FORMATS_BRS[quality],
-                      bitrate=bitrate)
-        self._media_info[idstr] = {quality: (media, int(time.time()) + 60 * 10)}
-        return media
-
 
 class KuwoArtistModel(ArtistModel, KuwoBaseModel):
     class Meta:
@@ -179,7 +129,10 @@ class KuwoArtistModel(ArtistModel, KuwoBaseModel):
         return _deserialize(data.get('data'), KuwoArtistSchema)
 
     def create_songs_g(self):
-        return create_g(self._api.get_artist_songs, self.identifier, KuwoSongSchema)
+        return create_g(self._api.get_artist_songs,
+                        self.identifier,
+                        KuwoSongSchemaV2,
+                        v2_model=True)
 
     def create_albums_g(self):
         return create_g(self._api.get_artist_albums, self.identifier, KuwoAlbumSchema, 'albumList')
@@ -202,7 +155,7 @@ class KuwoArtistModel(ArtistModel, KuwoBaseModel):
             data_songs = self._api.get_artist_songs(self.identifier)
             songs = []
             for data_song in data_songs.get('data', {}).get('list', []):
-                song = _deserialize(data_song, KuwoSongSchema)
+                song = _deserialize(data_song, KuwoSongSchemaV2, v2_model=True)
                 songs.append(song)
             self._songs = songs
         return self._songs
@@ -247,7 +200,8 @@ class KuwoAlbumModel(AlbumModel, KuwoBaseModel):
         if self._songs is None:
             data_album = self._api.get_album_info(self.identifier)
             songs = data_album.get('data', {}).get('musicList', [])
-            self._songs = list(map(lambda x: _deserialize(x, KuwoSongSchema), songs))
+            self._songs = list(
+                map(lambda x: _deserialize(x, KuwoSongSchemaV2, v2_model=True), songs))
         return self._songs
 
     @songs.setter
@@ -266,7 +220,11 @@ class KuwoPlaylistModel(PlaylistModel, KuwoBaseModel):
         return _deserialize(data_album.get('data'), KuwoPlaylistSchema)
 
     def create_songs_g(self):
-        return create_g(self._api.get_playlist_info, self.identifier, KuwoSongSchema, list_key='musicList')
+        return create_g(self._api.get_playlist_info,
+                        self.identifier,
+                        KuwoSongSchemaV2,
+                        list_key='musicList',
+                        v2_model=True)
 
 
 class KuwoSearchModel(SearchModel, KuwoBaseModel):
@@ -293,7 +251,7 @@ def search_song(keyword: str):
     data_songs = provider.api.search(keyword)
     songs = []
     for data_song in data_songs.get('data', {}).get('list', []):
-        song = _deserialize(data_song, KuwoSongSchema)
+        song = _deserialize(data_song, KuwoSongSchemaV2, v2_model=True)
         songs.append(song)
     return KuwoSearchModel(songs=songs)
 
@@ -338,5 +296,7 @@ def search(keyword: str, **kwargs) -> KuwoSearchModel:
 
 
 from .schemas import (
-    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema, KuwoUserSchema, KuwoUserPlaylistSchema,
+    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema,
+    KuwoPlaylistSchema, KuwoUserSchema, KuwoUserPlaylistSchema,
+    KuwoSongSchemaV2,
 )
