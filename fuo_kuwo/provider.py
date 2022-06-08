@@ -132,7 +132,7 @@ class KuwoProvider(AbstractProvider, ProviderV2):
         if exists is True:
             return q_media_mapping
 
-        # All song have hq and lq.
+        # 所有的歌曲都应该有 hq 和 lq 两种音质。
         q_media_mapping = {
             Quality.Audio.hq: None,
             Quality.Audio.lq: None,
@@ -144,6 +144,8 @@ class KuwoProvider(AbstractProvider, ProviderV2):
         return q_media_mapping
 
     def video_list_quality(self, video):
+        # 由于目前视频类型的资源只有 mv，而 mv 只有一种清晰度，
+        # 因此这里直接设置为 sd。
         return [Quality.Video.sd]
 
     def video_get_media(self, video, quality):
@@ -151,6 +153,7 @@ class KuwoProvider(AbstractProvider, ProviderV2):
         if exists is True:
             return media
 
+        # 当前只支持获取 mv 的链接。
         assert video.identifier.startswith('mv_')
         song_identifier = video.identifier[3:]
         js = self.api.get_song_mv(song_identifier)
