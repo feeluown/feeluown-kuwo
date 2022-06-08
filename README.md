@@ -21,6 +21,9 @@ test_kuwo_api.py -- Kuwo API tests
 
 ## Changelog
 
+### v0.1.6 (2022-06-08)
+* 修复获取歌曲/mv播放链接有一定概率会失败的问题
+
 ### v0.1.5 (2021-11-06)
 * 处理 html 字符实体
 
