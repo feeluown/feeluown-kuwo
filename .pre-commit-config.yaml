@@ -15,3 +15,4 @@ repos:
         entry: poetry run poetry2setup > setup.py
         language: python
         pass_filenames: false
+        files: ^(.*/)?pyproject.toml$
