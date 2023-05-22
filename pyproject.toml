@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "feeluown-kuwo"
+version = "0.1.0"
+description = ""
+authors = ["Bruce Zhang <zttt183525594@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "fuo_kuwo" }]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+feeluown = "*"
+marshmallow = "*"
+pyqt5 = "*"
+requests = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
