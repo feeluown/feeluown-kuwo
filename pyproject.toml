@@ -27,6 +27,7 @@ requests = "*"
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
 pyqt5 = "*"
+pre-commit = "*"
 
 [build-system]
 requires = ["poetry-core"]

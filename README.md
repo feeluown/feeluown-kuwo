@@ -11,8 +11,10 @@
 ### Install with pip
 `pip install --user .`
 
-## Development with pipenv
-`pipenv install` to create venv and start development.
+## Development with poetry
+`poetry install` to create venv and start development.
+`poetry run pre-commit install` to setup git pre-commit hooks.
+`poetry run poetry2setup > setup.py` before commit.
 
 ## Run tests
 `pytest -v`
