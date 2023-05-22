@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "fuo_kuwo"
+version = "0.1.6"
+description = "Kuwo music provider for FeelUOwn music player"
+authors = ["feeluown team"]
+readme = "README.md"
+license = "GPL"
+homepage = "https://github.com/feeluown/feeluown-kuwo"
+keywords = ["feeluown", "plugin", "kuwo"]
+packages = [{ include = "fuo_kuwo" }]
+include = ['assets/*.svg']
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3 :: Only'
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+feeluown = ">=3.7.7"
+marshmallow = "*"
+requests = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pyqt5 = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins."fuo.plugins_v1"]
+"kuwo" = "fuo_kuwo"
