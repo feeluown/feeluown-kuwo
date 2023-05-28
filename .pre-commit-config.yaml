@@ -6,13 +6,3 @@ repos:
       - id: poetry-lock
       - id: poetry-export
         args: [ "-f", "requirements.txt", "-o", "requirements.txt" ]
-
-  - repo: local
-    hooks:
-      - id: poetry2setup
-        name: poetry2setup
-        description: run poetry2setup
-        entry: poetry run poetry2setup > setup.py
-        language: python
-        pass_filenames: false
-        files: ^poetry.lock$
