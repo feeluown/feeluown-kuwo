@@ -104,7 +104,7 @@ class KuwoArtistSchema(Schema):
             identifier=data.get('identifier'),
             name=normalize_field(data.get('name')),
             cover=data.get('pic300'),
-            desc=data.get('desc'), info=data.get('desc')
+            desc=normalize_field(data.get('desc')), info=data.get('desc')
         )
 
 

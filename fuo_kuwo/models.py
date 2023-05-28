@@ -287,6 +287,10 @@ class KuwoUserModel(UserModel, KuwoBaseModel):
         data = self._api.get_user_playlists()
         data_playlists = data.get('plist', [])
         return [_deserialize(data_playlist, KuwoUserPlaylistSchema) for data_playlist in data_playlists]
+    
+    def get_rec_playlists(self) -> list:
+        data_playlists = self._api.playlist_recommend(20, 1)
+        return [_deserialize(data_playlist, KuwoPlaylistSchema) for data_playlist in data_playlists.get('data', {}).get('list', [])]
 
 
 def search_song(keyword: str):
