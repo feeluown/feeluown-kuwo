@@ -1,5 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout
+from feeluown.utils import aio
 
 from feeluown.utils.reader import wrap
 from feeluown.gui.widgets.playlist import PlaylistListView, PlaylistListModel, \
@@ -11,7 +12,7 @@ async def render(req, **kwargs):
     app = req.ctx['app']
     provider = app.library.get('kuwo')
 
-    playlists = provider._user.get_rec_playlists()
+    playlists = await aio.run_fn(provider._user.get_rec_playlists)
     view = ExploreView()
     # view.daily_rec_btn.clicked.connect(
     #     lambda: app.browser.goto(page='/providers/kuwo/daily_recommendation'))

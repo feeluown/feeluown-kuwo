@@ -51,6 +51,7 @@ class KuwoUiManager:
         kw_explore_item.clicked.connect(
             lambda: self._app.browser.goto(page='/providers/kuwo/explore'),
             weak=False)
+        self._app.mymusic_uimgr.clear()
         self._app.mymusic_uimgr.add_item(kw_explore_item)
         self._pvd_item.text = f'{__alias__} - 已登录'
 
