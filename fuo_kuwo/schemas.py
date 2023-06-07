@@ -2,6 +2,9 @@ import unicodedata
 import html
 
 from marshmallow import Schema, fields, post_load, EXCLUDE
+from feeluown.library import SongModel, BriefAlbumModel, BriefArtistModel
+
+SOURCE = 'kuwo'
 
 
 def normalize_str(s):
@@ -43,7 +46,8 @@ class KuwoSongSchema(Schema):
     def create_model(self, data, **kwargs):
         if data.get('artistid'):
             artists = [
-                KuwoArtistModel(
+                BriefArtistModel(
+                    source=SOURCE,
                     identifier=data.get('artistid'),
                     name=normalize_field(data.get('artist'))
                 )
@@ -51,18 +55,25 @@ class KuwoSongSchema(Schema):
         else:
             artists = []
         if data.get('albumid'):
-            album = KuwoAlbumModel(identifier=data.get('albumid'),
-                                   name=normalize_field(data.get('album')),
-                                   cover=data.get('albumpic', ''))
+            album = BriefAlbumModel(
+                source=SOURCE,
+                identifier=data.get('albumid'),
+                name=normalize_field(data.get('album')),
+            )
         else:
             album = None
-        return KuwoSongModel(identifier=data.get('identifier'),
-                             duration=data.get('duration') * 1000,
-                             title=normalize_field(data.get('title')),
-                             artists=artists,
-                             album=album,
-                             lossless=data.get('lossless', False),
-                             hasmv=data.get('hasmv', 0))
+        song = SongModel(
+            source=SOURCE,
+            identifier=str(data.get('identifier')),
+            duration=data.get('duration') * 1000,
+            title=normalize_field(data.get('title')),
+            artists=artists,
+            album=album,
+            pic_url=data['albumpic'],
+        )
+        song.cache_set('lossless', data.get('lossless', False))  # bool
+        song.cache_set('hasmv', bool(data.get('hasmv', 0)))  # int
+        return song
 
 
 class KuwoAlbumSchema(Schema):
@@ -155,4 +166,4 @@ class KuwoUserSchema(Schema):
         )
 
 
-from .models import KuwoSongModel, KuwoArtistModel, KuwoAlbumModel, KuwoPlaylistModel, KuwoUserModel
+from .models import KuwoArtistModel, KuwoAlbumModel, KuwoPlaylistModel, KuwoUserModel

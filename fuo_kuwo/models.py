@@ -45,7 +45,7 @@ def _deserialize(data, schema_class, gotten=True):
     """
     schema = schema_class()
     obj = schema.load(data)
-    if gotten:
+    if isinstance(obj, BaseModel) and gotten:
         obj.stage = ModelStage.gotten
     return obj
 
@@ -72,98 +72,6 @@ class KuwoLyricModel(LyricModel, BaseModel):
 
 class KuwoMvModel(MvModel, KuwoBaseModel):
     pass
-
-
-class KuwoSongModel(SongModel, KuwoBaseModel):
-    _media_info: dict = defaultdict(dict)
-
-    class Meta:
-        allow_get = True
-        fields = ['lossless', 'hasmv']
-        support_multi_quality = True
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    @classmethod
-    def get(cls, identifier):
-        data = cls._api.get_song_detail(identifier)
-        return _deserialize(data.get('data'), KuwoSongSchema)
-
-    @cached_field(ttl=180)
-    def mv(self):
-        if self.hasmv != 1:
-            return None
-        cover = ''
-        if self.album and self.album.cover:
-            cover = self.album.cover
-        js = self._api.get_song_mv(self.identifier)
-        data = _get_data_or_raise(js)
-        url = data.get('url', '')
-        if not url:
-            print(data)
-            logger.warning("song has no valid mv url, but attr 'hasmv' is true")
-        return KuwoMvModel(name=self.title,
-                           desc='',
-                           cover=cover,
-                           media=url)
-
-    @cached_field()
-    def lyric(self):
-        data = self._api.get_song_lyrics(self.identifier)
-        lyrics: list = data.get('data', {}).get('lrclist', [])
-        from fuo_kuwo.utils import parse_lyrics
-        return KuwoLyricModel(identifier=self.identifier,
-                              content=parse_lyrics(lyrics))
-
-    def list_quality(self):
-        formats = ['shq', 'hq', 'lq']
-        if not self.lossless:  # Note that this may trigger IO.
-            formats.remove('shq')
-        return formats
-
-    def get_media(self, quality):
-        idstr = str(self.identifier)
-
-        if quality == 'lq':
-            js = self._api.get_song_url(self.identifier)
-            data = _get_data_or_raise(js)
-            url = data.get('url', '')
-            if not url:
-                logger.warning("no song url for 'lq' quality")
-                return None
-            return Media(url,
-                         format=KuwoApi.FORMATS_BRS[quality],
-                         bitrate=KuwoApi.FORMATS_RATES[quality] // 1000)
-
-        # Check if media info already exists.
-        media_info = self._media_info.get(idstr)
-        if media_info and quality in media_info:
-            media, life_time = media_info[quality]
-            if life_time > time.time():
-                return media
-
-        # Response example::
-        #   format=ape
-        #   bitrate=1000
-        #   url=http://sq.sycdn.kuwo.cn/xx/yy/zz.ape
-        #   sig=1111111111111
-        text = self._api.get_song_url_mobi(self.identifier, quality)
-        media_data = {}
-        for line in text.split():
-            key, value = line.split('=', 1)
-            media_data[key] = value
-        # Check field value before use it since I'm not sure if the field always exists.
-        if not media_data.get('url'):
-            return None
-        bitrate = int(media_data.get('bitrate', 0))
-        if bitrate == 0:
-            bitrate = KuwoApi.FORMATS_RATES[quality] // 1000
-        media = Media(media_data['url'],
-                      format=KuwoApi.FORMATS_BRS[quality],
-                      bitrate=bitrate)
-        self._media_info[idstr] = {quality: (media, int(time.time()) + 60 * 10)}
-        return media
 
 
 class KuwoArtistModel(ArtistModel, KuwoBaseModel):
@@ -287,7 +195,7 @@ class KuwoUserModel(UserModel, KuwoBaseModel):
         data = self._api.get_user_playlists()
         data_playlists = data.get('plist', [])
         return [_deserialize(data_playlist, KuwoUserPlaylistSchema) for data_playlist in data_playlists]
-    
+
     def get_rec_playlists(self) -> list:
         data_playlists = self._api.playlist_recommend(20, 1)
         return [_deserialize(data_playlist, KuwoPlaylistSchema) for data_playlist in data_playlists.get('data', {}).get('list', [])]

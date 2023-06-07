@@ -1,7 +1,8 @@
 import json
 from urllib.parse import urlparse
 
-from fuo_kuwo.models import _deserialize, KuwoSongModel, KuwoArtistModel, KuwoAlbumModel
+from feeluown.library import SongModel
+from fuo_kuwo.models import _deserialize, KuwoArtistModel, KuwoAlbumModel
 from fuo_kuwo.schemas import KuwoSongSchema, KuwoArtistSchema
 
 
@@ -11,7 +12,7 @@ class TestSchemas:
             data_songs = json.load(f)
             for data_song in data_songs.get('data', {}).get('list', []):
                 song = _deserialize(data_song, KuwoSongSchema)
-                assert isinstance(song, KuwoSongModel)
+                assert isinstance(song, SongModel)
                 assert isinstance(song.identifier, int)
                 assert isinstance(song.title, str)
                 assert isinstance(song.lossless, bool)
