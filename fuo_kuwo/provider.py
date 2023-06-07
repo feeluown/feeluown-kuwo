@@ -5,8 +5,9 @@ from typing import List, Optional, Tuple
 from feeluown.library import (
     AbstractProvider, ProviderV2, ModelType, BriefVideoModel, LyricModel,
     SupportsVideoMultiQuality, SupportsSongMultiQuality,
+    SupportsAlbumGet, SupportsAlbumSongsReader,
 )
-from feeluown.library.model_protocol import BriefSongProtocol, BriefVideoProtocol
+from feeluown.library.model_protocol import BriefSongProtocol, BriefVideoProtocol, BriefAlbumProtocol
 from feeluown.media import Media, MediaType, Quality
 
 from .utils import parse_lyrics
@@ -20,7 +21,9 @@ Video = Quality.Video
 
 class KuwoProvider(
     AbstractProvider, ProviderV2,
-    SupportsVideoMultiQuality, SupportsSongMultiQuality,
+    SupportsVideoMultiQuality,
+    SupportsSongMultiQuality,
+    SupportsAlbumGet, SupportsAlbumSongsReader,
 ):
     api: KuwoApi
 
@@ -119,7 +122,7 @@ class KuwoProvider(
             title=song.title,
         )
 
-    def video_list_quality(self, video: BriefVideoProtocol) -> List[Video]:
+    def video_list_quality(self, _: BriefVideoProtocol) -> List[Video]:
         return [Video.sd]
 
     def video_get_media(self, video, _):
@@ -135,10 +138,18 @@ class KuwoProvider(
             return None
         return Media(url, MediaType.video)
 
+    def album_get(self, identifier):
+        data_album = self.api.get_album_info(identifier)
+        return _deserialize(data_album['data'], KuwoAlbumSchema)
+
+    def album_create_songs_rd(self, album: BriefAlbumProtocol):
+        u_album = self.album_get(album.identifier)
+        return u_album.songs
+
 
 provider = KuwoProvider()
 
 from .models import search, _deserialize, _get_data_or_raise
-from .schemas import KuwoSongSchema
+from .schemas import KuwoSongSchema, KuwoAlbumSchema
 
 provider.search = search

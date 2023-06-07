@@ -66,14 +66,6 @@ class KuwoBaseModel(BaseModel):
         provider = provider
 
 
-class KuwoLyricModel(LyricModel, BaseModel):
-    pass
-
-
-class KuwoMvModel(MvModel, KuwoBaseModel):
-    pass
-
-
 class KuwoArtistModel(ArtistModel, KuwoBaseModel):
     class Meta:
         allow_get = True
@@ -135,32 +127,6 @@ class KuwoArtistModel(ArtistModel, KuwoBaseModel):
     def songs(self, value):
         """ Leave it empty """
         pass
-
-
-class KuwoAlbumModel(AlbumModel, KuwoBaseModel):
-    class Meta:
-        allow_get = True
-        fields = ['_songs']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    @classmethod
-    def get(cls, identifier):
-        data_album = cls._api.get_album_info(identifier)
-        return _deserialize(data_album.get('data'), KuwoAlbumSchema)
-
-    @property
-    def songs(self):
-        if self._songs is None:
-            data_album = self._api.get_album_info(self.identifier)
-            songs = data_album.get('data', {}).get('musicList', [])
-            self._songs = list(map(lambda x: _deserialize(x, KuwoSongSchema), songs))
-        return self._songs
-
-    @songs.setter
-    def songs(self, value):
-        self._songs = value
 
 
 class KuwoPlaylistModel(PlaylistModel, KuwoBaseModel):

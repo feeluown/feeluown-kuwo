@@ -2,7 +2,10 @@ import unicodedata
 import html
 
 from marshmallow import Schema, fields, post_load, EXCLUDE
-from feeluown.library import SongModel, BriefAlbumModel, BriefArtistModel
+from feeluown.library import (
+    SongModel, BriefAlbumModel, BriefArtistModel,
+    AlbumModel,
+)
 
 SOURCE = 'kuwo'
 
@@ -86,19 +89,24 @@ class KuwoAlbumSchema(Schema):
     songs = fields.List(fields.Nested('KuwoSongSchema'),
                         data_key='musicList',
                         allow_none=True, required=False)
+    song_count = fields.Int(data_key='total', required=True)
+    released = fields.Str(data_key='releaseDate', required=True)
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoAlbumModel(
+        return AlbumModel(
+            source=SOURCE,
             identifier=data.get('identifier'),
             name=normalize_field(data.get('name')),
-            artists=[KuwoArtistModel(
+            artists=[BriefArtistModel(
+                source=SOURCE,
                 identifier=data.get('artistid'),
                 name=normalize_field(data.get('artist')))],
-            desc=normalize_field(data.get('albuminfo', '')).replace('\n', '<br>'),
+            description=normalize_field(data.get('albuminfo', '')).replace('\n', '<br>'),
             cover=data.get('cover'),
-            songs=[],
-            _songs=data.get('songs')
+            songs=data.get('songs') or [],
+            song_count=data['song_count'],
+            released=data['released'],
         )
 
 
@@ -166,4 +174,4 @@ class KuwoUserSchema(Schema):
         )
 
 
-from .models import KuwoArtistModel, KuwoAlbumModel, KuwoPlaylistModel, KuwoUserModel
+from .models import KuwoArtistModel, KuwoPlaylistModel, KuwoUserModel
