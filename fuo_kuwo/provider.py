@@ -113,7 +113,7 @@ class KuwoProvider(
         return LyricModel(
             source=__identifier__,
             identifier=song.identifier,
-            content=parse_lyrics(lyrics)
+            content=parse_lyrics(lyrics) or '',
         )
 
     def song_get_mv(self, song):
