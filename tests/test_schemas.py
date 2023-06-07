@@ -1,7 +1,7 @@
 import json
 from urllib.parse import urlparse
 
-from feeluown.library import SongModel, AlbumModel, ArtistModel
+from feeluown.library import SongModel, BriefAlbumModel, BriefArtistModel
 from fuo_kuwo.models import _deserialize
 from fuo_kuwo.schemas import KuwoSongSchema, KuwoArtistSchema
 
@@ -15,14 +15,15 @@ class TestSchemas:
                 assert isinstance(song, SongModel)
                 assert isinstance(song.identifier, str)
                 assert isinstance(song.title, str)
-                assert isinstance(song.lossless, bool)
-                assert isinstance(song.hasmv, int)
-                assert song.hasmv in [0, 1]
+                assert isinstance(song.cache_get('lossless')[0], bool)
+                hasmv = song.cache_get('hasmv')[0]
+                assert isinstance(hasmv, int)
+                assert hasmv in (True, False)
                 assert isinstance(song.duration, int)
                 if song.artists and len(song.artists) > 0:
-                    assert isinstance(song.artists[0], ArtistModel)
+                    assert isinstance(song.artists[0], BriefArtistModel)
                 if song.album:
-                    assert isinstance(song.album, AlbumModel)
+                    assert isinstance(song.album, BriefAlbumModel)
 
     def test_search_artist_schema(self):
         with open('./examples/search_artist.json', 'r') as f:
@@ -31,9 +32,8 @@ class TestSchemas:
                 artist = _deserialize(data_artist, KuwoArtistSchema)
                 assert isinstance(artist.identifier, str)
                 assert isinstance(artist.name, str)
-                assert isinstance(artist.cover, str)
-                uri = urlparse(artist.cover)
+                assert isinstance(artist.pic_url, str)
+                uri = urlparse(artist.pic_url)
                 assert uri.hostname == 'star.kuwo.cn'
                 uri.path.endswith('.jpg')
-                assert isinstance(artist.desc, str)
-                assert isinstance(artist.info, str)
+                assert isinstance(artist.description, str)

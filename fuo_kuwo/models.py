@@ -3,7 +3,7 @@ import time
 from feeluown.excs import ProviderIOError
 
 from feeluown.models import BaseModel, ModelStage, SearchModel, \
-    SearchType, PlaylistModel, UserModel, cached_field
+    SearchType, UserModel, cached_field
 from feeluown.utils.reader import SequentialReader
 
 from .api import KuwoApi
@@ -62,20 +62,6 @@ class KuwoBaseModel(BaseModel):
     class Meta:
         fields = ['rid']
         provider = provider
-
-
-class KuwoPlaylistModel(PlaylistModel, KuwoBaseModel):
-    class Meta:
-        allow_get = True
-        allow_create_songs_g = True
-
-    @classmethod
-    def get(cls, identifier):
-        data_album = cls._api.get_playlist_info(identifier)
-        return _deserialize(data_album.get('data'), KuwoPlaylistSchema)
-
-    def create_songs_g(self):
-        return create_g(self._api.get_playlist_info, self.identifier, KuwoSongSchema, list_key='musicList')
 
 
 class KuwoSearchModel(SearchModel, KuwoBaseModel):

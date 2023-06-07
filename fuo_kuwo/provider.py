@@ -7,6 +7,7 @@ from feeluown.library import (
     SupportsVideoMultiQuality, SupportsSongMultiQuality,
     SupportsAlbumGet, SupportsAlbumSongsReader,
     SupportsArtistGet, SupportsArtistAlbumsReader, SupportsArtistSongsReader,
+    SupportsPlaylistGet, SupportsPlaylistSongsReader,
 )
 from feeluown.library.model_protocol import BriefArtistProtocol, BriefSongProtocol, BriefVideoProtocol, BriefAlbumProtocol
 from feeluown.media import Media, MediaType, Quality
@@ -26,6 +27,7 @@ class KuwoProvider(
     SupportsSongMultiQuality,
     SupportsAlbumGet, SupportsAlbumSongsReader,
     SupportsArtistGet, SupportsArtistAlbumsReader, SupportsArtistSongsReader,
+    SupportsPlaylistGet, SupportsPlaylistSongsReader,
 ):
     api: KuwoApi
 
@@ -161,10 +163,20 @@ class KuwoProvider(
                         KuwoAlbumSchema,
                         'albumList')
 
+    def playlist_get(self, identifier):
+        data_album = self.api.get_playlist_info(identifier)
+        return _deserialize(data_album['data'], KuwoPlaylistSchema)
+
+    def playlist_create_songs_rd(self, playlist):
+        return create_g(self.api.get_playlist_info,
+                        playlist.identifier,
+                        KuwoSongSchema,
+                        list_key='musicList')
+
 
 provider = KuwoProvider()
 
 from .models import search, _deserialize, _get_data_or_raise, create_g
-from .schemas import KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema
+from .schemas import KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema
 
 provider.search = search

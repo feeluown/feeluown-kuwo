@@ -4,7 +4,7 @@ import html
 from marshmallow import Schema, fields, post_load, EXCLUDE
 from feeluown.library import (
     SongModel, BriefAlbumModel, BriefArtistModel,
-    AlbumModel, ArtistModel,
+    AlbumModel, ArtistModel, PlaylistModel, BriefPlaylistModel,
 )
 
 SOURCE = 'kuwo'
@@ -41,7 +41,7 @@ class KuwoSongSchema(Schema):
     artistid = fields.Int(data_key='artistid', required=True)
     album = fields.Str(data_key='album', required=False)
     albumid = fields.Int(data_key='albumid', required=False)
-    albumpic = fields.Str(data_key='albumpic', required=False)
+    albumpic = fields.Str(data_key='albumpic', required=False, missing='')
     lossless = fields.Bool(data_key='hasLossless', required=False)
     hasmv = fields.Int(data_key='hasmv', required=False)
 
@@ -143,22 +143,19 @@ class KuwoArtistSchema(KuwoBriefArtistSchema):
 
 class KuwoPlaylistSchema(Schema):
     identifier = fields.Int(data_key='id', required=True)
-    cover = fields.Str(data_key='img', required=False)
+    cover = fields.Str(data_key='img', required=False, missing='')
     name = fields.Str(data_key='name', required=True)
-    desc = fields.Str(data_key='info', required=False)
-    songs = fields.List(fields.Nested('KuwoSongSchema'),
-                        data_key='musicList',
-                        allow_none=True,
-                        required=False)
+    desc = fields.Str(data_key='info', required=False, missing='')
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoPlaylistModel(
+        return PlaylistModel(
+            source=SOURCE,
             identifier=data.get('identifier'),
+            creator=None,
             name=normalize_field(data.get('name')),
             cover=data.get('cover'),
-            desc=data.get('desc'),
-            songs=data.get('songs')
+            description=data.get('desc'),
         )
 
 
@@ -169,12 +166,10 @@ class KuwoUserPlaylistSchema(Schema):
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoPlaylistModel(
+        return BriefPlaylistModel(
+            source=SOURCE,
             identifier=data.get('identifier'),
             name=normalize_field(data.get('name')),
-            cover=data.get('cover'),
-            desc='',
-            songs=None
         )
 
 
@@ -188,4 +183,4 @@ class KuwoUserSchema(Schema):
         )
 
 
-from .models import KuwoPlaylistModel, KuwoUserModel
+from .models import KuwoUserModel
