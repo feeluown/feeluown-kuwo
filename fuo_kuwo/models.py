@@ -1,10 +1,8 @@
 import logging
 import time
-from collections import defaultdict
 from feeluown.excs import ProviderIOError
 
-from feeluown.media import Media
-from feeluown.models import BaseModel, SongModel, ModelStage, SearchModel, ArtistModel, AlbumModel, MvModel, LyricModel, \
+from feeluown.models import BaseModel, ModelStage, SearchModel, \
     SearchType, PlaylistModel, UserModel, cached_field
 from feeluown.utils.reader import SequentialReader
 
@@ -64,69 +62,6 @@ class KuwoBaseModel(BaseModel):
     class Meta:
         fields = ['rid']
         provider = provider
-
-
-class KuwoArtistModel(ArtistModel, KuwoBaseModel):
-    class Meta:
-        allow_get = True
-        allow_create_albums_g = True
-        allow_create_songs_g = True
-        fields = ['_songs', '_albums', 'info']
-
-    @classmethod
-    def get(cls, identifier):
-        data = cls._api.get_artist_info(identifier)
-        return _deserialize(data.get('data'), KuwoArtistSchema)
-
-    def create_songs_g(self):
-        return create_g(self._api.get_artist_songs, self.identifier, KuwoSongSchema)
-
-    def create_albums_g(self):
-        return create_g(self._api.get_artist_albums, self.identifier, KuwoAlbumSchema, 'albumList')
-
-    @property
-    def desc(self):
-        if not self.info:
-            artist: KuwoArtistModel = self.get(self.identifier)
-            self.info = artist.info
-        return self.info
-
-    @desc.setter
-    def desc(self, value):
-        """ Leave it empty """
-        pass
-
-    @property
-    def songs(self):
-        if self._songs is None:
-            data_songs = self._api.get_artist_songs(self.identifier)
-            songs = []
-            for data_song in data_songs.get('data', {}).get('list', []):
-                song = _deserialize(data_song, KuwoSongSchema)
-                songs.append(song)
-            self._songs = songs
-        return self._songs
-
-    @property
-    def albums(self):
-        if self._albums is None:
-            data_albums = self._api.get_artist_albums(self.identifier)
-            albums = []
-            for data_album in data_albums.get('data', {}).get('albumList', []):
-                album = _deserialize(data_album, KuwoAlbumSchema)
-                albums.append(album)
-            self._albums = albums
-        return self._albums
-
-    @albums.setter
-    def albums(self, value):
-        """ Leave it empty """
-        pass
-
-    @songs.setter
-    def songs(self, value):
-        """ Leave it empty """
-        pass
 
 
 class KuwoPlaylistModel(PlaylistModel, KuwoBaseModel):

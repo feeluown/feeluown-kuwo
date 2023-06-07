@@ -4,7 +4,7 @@ import html
 from marshmallow import Schema, fields, post_load, EXCLUDE
 from feeluown.library import (
     SongModel, BriefAlbumModel, BriefArtistModel,
-    AlbumModel,
+    AlbumModel, ArtistModel,
 )
 
 SOURCE = 'kuwo'
@@ -82,14 +82,14 @@ class KuwoSongSchema(Schema):
 class KuwoAlbumSchema(Schema):
     identifier = fields.Int(data_key='albumid', required=True)
     name = fields.Str(data_key='album', required=True)
-    cover = fields.Str(data_key='pic', required=False)
+    cover = fields.Str(data_key='pic', required=False, missing='')
     artist = fields.Str(data_key='artist', required=True)
     artistid = fields.Int(data_key='artistid', required=True)
     albuminfo = fields.Str(data_key='albuminfo', required=False)
     songs = fields.List(fields.Nested('KuwoSongSchema'),
                         data_key='musicList',
                         allow_none=True, required=False)
-    song_count = fields.Int(data_key='total', required=True)
+    song_count = fields.Int(data_key='total', required=False, missing=-1)
     released = fields.Str(data_key='releaseDate', required=True)
 
     @post_load
@@ -110,20 +110,34 @@ class KuwoAlbumSchema(Schema):
         )
 
 
-class KuwoArtistSchema(Schema):
+class KuwoBriefArtistSchema(Schema):
     identifier = fields.Int(data_key='id', required=True)
     name = fields.Str(data_key='name', required=True)
-    pic = fields.Str(data_key='pic', required=False)
-    pic300 = fields.Str(data_key='pic300', required=False)
-    desc = fields.Str(data_key='info', required=False)
 
     @post_load
     def create_model(self, data, **kwargs):
-        return KuwoArtistModel(
+        return BriefArtistModel(
+            source=SOURCE,
+            identifier=data.get['identifier'],
+            name=normalize_field(data.get['name']),
+        )
+
+
+class KuwoArtistSchema(KuwoBriefArtistSchema):
+    pic = fields.Str(data_key='pic', required=False, missing='')
+    pic300 = fields.Str(data_key='pic300', required=False, missing='')
+    desc = fields.Str(data_key='info', required=False, missing='')
+
+    @post_load
+    def create_model(self, data, **kwargs):
+        return ArtistModel(
+            source=SOURCE,
             identifier=data.get('identifier'),
             name=normalize_field(data.get('name')),
-            cover=data.get('pic300'),
-            desc=normalize_field(data.get('desc')), info=data.get('desc')
+            pic_url=data.get('pic300'),
+            aliases=[],
+            hot_songs=[],
+            description=normalize_field(data.get('desc')),
         )
 
 
@@ -174,4 +188,4 @@ class KuwoUserSchema(Schema):
         )
 
 
-from .models import KuwoArtistModel, KuwoPlaylistModel, KuwoUserModel
+from .models import KuwoPlaylistModel, KuwoUserModel

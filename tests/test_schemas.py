@@ -1,8 +1,8 @@
 import json
 from urllib.parse import urlparse
 
-from feeluown.library import SongModel, AlbumModel
-from fuo_kuwo.models import _deserialize, KuwoArtistModel
+from feeluown.library import SongModel, AlbumModel, ArtistModel
+from fuo_kuwo.models import _deserialize
 from fuo_kuwo.schemas import KuwoSongSchema, KuwoArtistSchema
 
 
@@ -20,7 +20,7 @@ class TestSchemas:
                 assert song.hasmv in [0, 1]
                 assert isinstance(song.duration, int)
                 if song.artists and len(song.artists) > 0:
-                    assert isinstance(song.artists[0], KuwoArtistModel)
+                    assert isinstance(song.artists[0], ArtistModel)
                 if song.album:
                     assert isinstance(song.album, AlbumModel)
 

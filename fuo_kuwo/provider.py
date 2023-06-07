@@ -6,8 +6,9 @@ from feeluown.library import (
     AbstractProvider, ProviderV2, ModelType, BriefVideoModel, LyricModel,
     SupportsVideoMultiQuality, SupportsSongMultiQuality,
     SupportsAlbumGet, SupportsAlbumSongsReader,
+    SupportsArtistGet, SupportsArtistAlbumsReader, SupportsArtistSongsReader,
 )
-from feeluown.library.model_protocol import BriefSongProtocol, BriefVideoProtocol, BriefAlbumProtocol
+from feeluown.library.model_protocol import BriefArtistProtocol, BriefSongProtocol, BriefVideoProtocol, BriefAlbumProtocol
 from feeluown.media import Media, MediaType, Quality
 
 from .utils import parse_lyrics
@@ -24,6 +25,7 @@ class KuwoProvider(
     SupportsVideoMultiQuality,
     SupportsSongMultiQuality,
     SupportsAlbumGet, SupportsAlbumSongsReader,
+    SupportsArtistGet, SupportsArtistAlbumsReader, SupportsArtistSongsReader,
 ):
     api: KuwoApi
 
@@ -146,10 +148,23 @@ class KuwoProvider(
         u_album = self.album_get(album.identifier)
         return u_album.songs
 
+    def artist_get(self, identifier):
+        data = self.api.get_artist_info(identifier)
+        return _deserialize(data['data'], KuwoArtistSchema)
+
+    def artist_create_songs_rd(self, artist: BriefArtistProtocol):
+        return create_g(self.api.get_artist_songs, artist.identifier, KuwoSongSchema)
+
+    def artist_create_albums_rd(self, artist: BriefArtistProtocol):
+        return create_g(self.api.get_artist_albums,
+                        artist.identifier,
+                        KuwoAlbumSchema,
+                        'albumList')
+
 
 provider = KuwoProvider()
 
-from .models import search, _deserialize, _get_data_or_raise
-from .schemas import KuwoSongSchema, KuwoAlbumSchema
+from .models import search, _deserialize, _get_data_or_raise, create_g
+from .schemas import KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema
 
 provider.search = search
