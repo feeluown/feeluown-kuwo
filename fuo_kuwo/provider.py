@@ -195,6 +195,18 @@ class KuwoProvider(
                         KuwoSongSchema,
                         list_key='musicList')
 
+    def search(self, keyword: str, **kwargs) -> SimpleSearchResult:
+        type_ = SearchType.parse(kwargs['type_'])
+        if type_ == SearchType.so:
+            return search_song(keyword)
+        if type_ == SearchType.al:
+            return search_album(keyword)
+        if type_ == SearchType.ar:
+            return search_artist(keyword)
+        if type_ == SearchType.pl:
+            return search_playlist(keyword)
+        return None
+
 
 def create_g(func, identifier, schema, list_key='list'):
     data = func(identifier, page=1).get('data')
@@ -272,19 +284,6 @@ def search_playlist(keyword: str):
         playlist = _deserialize(data_playlist, KuwoPlaylistSchema)
         playlists.append(playlist)
     return SimpleSearchResult(q=keyword, playlists=playlists)
-
-
-def search(keyword: str, **kwargs) -> SimpleSearchResult:
-    type_ = SearchType.parse(kwargs['type_'])
-    if type_ == SearchType.so:
-        return search_song(keyword)
-    if type_ == SearchType.al:
-        return search_album(keyword)
-    if type_ == SearchType.ar:
-        return search_artist(keyword)
-    if type_ == SearchType.pl:
-        return search_playlist(keyword)
-    raise Exception('unreachable code')
 
 
 provider = KuwoProvider()
