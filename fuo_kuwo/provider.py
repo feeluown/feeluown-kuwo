@@ -88,7 +88,7 @@ class KuwoProvider(
             quality_list.append(Quality.Audio.shq)
         return quality_list
 
-    def song_get_media(self, song: BriefVideoProtocol, quality: Audio):
+    def song_get_media(self, song: BriefSongProtocol, quality: Audio):
         quality = quality.value
         if quality == 'lq':
             js = self.api.get_song_url(song.identifier)
