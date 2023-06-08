@@ -1,17 +1,24 @@
 import logging
 import time
-from typing import List, Optional, Tuple
+from typing import List
 
+from feeluown.excs import ProviderIOError
 from feeluown.library import (
     AbstractProvider, ProviderV2, ModelType, BriefVideoModel, LyricModel,
     SupportsVideoMultiQuality, SupportsSongMultiQuality,
     SupportsAlbumGet, SupportsAlbumSongsReader,
     SupportsArtistGet, SupportsArtistAlbumsReader, SupportsArtistSongsReader,
     SupportsPlaylistGet, SupportsPlaylistSongsReader,
+    SimpleSearchResult, SearchType,
 )
 from feeluown.library.model_protocol import BriefArtistProtocol, BriefSongProtocol, BriefVideoProtocol, BriefAlbumProtocol
 from feeluown.media import Media, MediaType, Quality
+from feeluown.utils.reader import SequentialReader
 
+from .schemas import (
+    KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema,
+    KuwoUserPlaylistSchema,
+)
 from .utils import parse_lyrics
 from . import __identifier__, __alias__
 from .api import KuwoApi
@@ -19,6 +26,7 @@ from .api import KuwoApi
 logger = logging.getLogger(__name__)
 Audio = Quality.Audio
 Video = Quality.Video
+SOURCE = __identifier__
 
 
 class KuwoProvider(
@@ -53,7 +61,21 @@ class KuwoProvider(
         return __identifier__
 
     def use_model_v2(self, model_type: ModelType) -> bool:
-        return model_type in (ModelType.song, )
+        return model_type in (ModelType.song, ModelType.user)
+
+    """
+    Requires: current user is not empty.
+    """
+    def current_user_playlists(self):
+        data = self.api.get_user_playlists()
+        data_playlists = data.get('plist', [])
+        return [_deserialize(data_playlist, KuwoUserPlaylistSchema)
+                for data_playlist in data_playlists]
+
+    def current_user_rec_playlists(self):
+        data_playlists = self.api.playlist_recommend(20, 1)
+        return [_deserialize(data_playlist, KuwoPlaylistSchema)
+                for data_playlist in data_playlists.get('data', {}).get('list', [])]
 
     def song_get(self, identifier):
         data = self.api.get_song_detail(identifier)
@@ -61,10 +83,10 @@ class KuwoProvider(
 
     def song_list_quality(self, song: BriefSongProtocol) -> List[Audio]:
         has_lossless = self._model_cache_get_or_fetch(song, 'lossless')
-        l = [Quality.Audio.hq, Quality.Audio.lq]
+        quality_list = [Quality.Audio.hq, Quality.Audio.lq]
         if has_lossless:
-            l.append(Quality.Audio.shq)
-        return l
+            quality_list.append(Quality.Audio.shq)
+        return quality_list
 
     def song_get_media(self, song: BriefVideoProtocol, quality: Audio):
         quality = quality.value
@@ -174,9 +196,95 @@ class KuwoProvider(
                         list_key='musicList')
 
 
+def create_g(func, identifier, schema, list_key='list'):
+    data = func(identifier, page=1).get('data')
+    total = int(data['total'])
+
+    def g():
+        nonlocal data
+        if data is None:
+            yield from ()
+        else:
+            page = 1
+            while data[list_key]:
+                obj_data_list = data[list_key]
+                for obj_data in obj_data_list:
+                    obj = _deserialize(obj_data, schema, gotten=True)
+                    yield obj
+                page += 1
+                data = func(identifier, page=page).get('data', {})
+
+    return SequentialReader(g(), total)
+
+
+def _deserialize(data, schema_class, gotten=True):
+    """ deserialize schema data to model
+
+    :param data: data to be deserialize
+    :param schema_class: schema class
+    :param gotten:
+    :return:
+    """
+    schema = schema_class()
+    obj = schema.load(data)
+    return obj
+
+
+def _get_data_or_raise(js):
+    """Get data from response json"""
+    data = js.get('data')
+    if not data:
+        raise ProviderIOError(f"resp code is {js.get('code', -1000)}, expect 200")
+    return data
+
+
+def search_song(keyword: str):
+    data_songs = provider.api.search(keyword)
+    songs = []
+    for data_song in data_songs.get('data', {}).get('list', []):
+        song = _deserialize(data_song, KuwoSongSchema)
+        songs.append(song)
+    return SimpleSearchResult(q=keyword, songs=songs)
+
+
+def search_album(keyword: str):
+    data_albums = provider.api.search_album(keyword)
+    albums = []
+    for data_album in data_albums.get('data', {}).get('albumList', []):
+        album = _deserialize(data_album, KuwoAlbumSchema)
+        albums.append(album)
+    return SimpleSearchResult(q=keyword, albums=albums)
+
+
+def search_artist(keyword: str):
+    data_artists = provider.api.search_artist(keyword)
+    artists = []
+    for data_artist in data_artists.get('data', {}).get('artistList', []):
+        artist = _deserialize(data_artist, KuwoArtistSchema)
+        artists.append(artist)
+    return SimpleSearchResult(q=keyword, artists=artists)
+
+
+def search_playlist(keyword: str):
+    data_playlists = provider.api.search_playlist(keyword)
+    playlists = []
+    for data_playlist in data_playlists.get('data', {}).get('list', []):
+        playlist = _deserialize(data_playlist, KuwoPlaylistSchema)
+        playlists.append(playlist)
+    return SimpleSearchResult(q=keyword, playlists=playlists)
+
+
+def search(keyword: str, **kwargs) -> SimpleSearchResult:
+    type_ = SearchType.parse(kwargs['type_'])
+    if type_ == SearchType.so:
+        return search_song(keyword)
+    if type_ == SearchType.al:
+        return search_album(keyword)
+    if type_ == SearchType.ar:
+        return search_artist(keyword)
+    if type_ == SearchType.pl:
+        return search_playlist(keyword)
+    raise Exception('unreachable code')
+
+
 provider = KuwoProvider()
-
-from .models import search, _deserialize, _get_data_or_raise, create_g
-from .schemas import KuwoSongSchema, KuwoAlbumSchema, KuwoArtistSchema, KuwoPlaylistSchema
-
-provider.search = search

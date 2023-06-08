@@ -3,12 +3,13 @@ import os
 from pathlib import Path
 
 from feeluown.consts import DATA_DIR
+from feeluown.library import BriefUserModel
 from feeluown.gui.widgets import CookiesLoginDialog
 from feeluown.gui.widgets.login import InvalidCookies
 from feeluown.uimodels.provider import ProviderUiManager
 from feeluown.utils import aio
 
-from . import __alias__
+from . import __identifier__, __alias__
 from .provider import provider
 
 USER_INFO_FILE = DATA_DIR + '/kuwo_music_user_session.json'
@@ -31,22 +32,22 @@ class KuwoUiManager:
     def login_or_show(self):
         if provider.user is None:
             dialog = LoginDialog()
-            dialog.login_succeed.connect(self.load_user)
+            dialog.login_succeed.connect(lambda: aio.run_afn(self.load_user))
             dialog.show()
             dialog.autologin()
         else:
-            self.load_user()
+            aio.run_afn(self.load_user)
 
     def initialize(self):
         from .pages.explorer import render as explore_render # noqa
         self._app.browser.route('/providers/kuwo/explore')(explore_render)
 
-    def load_user(self):
-        user = provider.user
+    async def load_user(self):
         self._app.ui.left_panel.my_music_con.show()
         self._app.ui.left_panel.playlists_con.show()
         self._app.pl_uimgr.clear()
-        self._app.pl_uimgr.add(user.playlists)
+        user_playlists = await aio.run_fn(provider.current_user_playlists)
+        self._app.pl_uimgr.add(user_playlists)
         kw_explore_item = self._app.mymusic_uimgr.create_item('🎵 发现音乐')
         kw_explore_item.clicked.connect(
             lambda: self._app.browser.goto(page='/providers/kuwo/explore'),
@@ -72,7 +73,7 @@ class LoginDialog(CookiesLoginDialog):
         provider.api.set_cookies(cookies)
         # try to extract current user
         try:
-            user = await aio.run_in_executor(None, provider.User.get, userid)
+            user = BriefUserModel(source=__identifier__, identifier=userid)
         except Exception:
             provider.api.set_cookies(None)
             raise InvalidCookies('get user info with cookies failed, expired cookies?')

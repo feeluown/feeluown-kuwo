@@ -2,7 +2,7 @@ import json
 from urllib.parse import urlparse
 
 from feeluown.library import SongModel, BriefAlbumModel, BriefArtistModel
-from fuo_kuwo.models import _deserialize
+from fuo_kuwo.provider import _deserialize
 from fuo_kuwo.schemas import KuwoSongSchema, KuwoArtistSchema
 
 

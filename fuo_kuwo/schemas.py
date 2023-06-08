@@ -171,16 +171,3 @@ class KuwoUserPlaylistSchema(Schema):
             identifier=data.get('identifier'),
             name=normalize_field(data.get('name')),
         )
-
-
-class KuwoUserSchema(Schema):
-    identifier = fields.Str(data_key='id', required=True)
-
-    @post_load
-    def create_model(self, data, **kwargs):
-        return KuwoUserModel(
-            identifier=data.get('identifier', '')
-        )
-
-
-from .models import KuwoUserModel

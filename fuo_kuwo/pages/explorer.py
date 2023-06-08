@@ -7,12 +7,13 @@ from feeluown.gui.widgets.playlist import PlaylistListView, PlaylistListModel, \
     PlaylistFilterProxyModel
 from feeluown.gui.helpers import fetch_cover_wrapper, BgTransparentMixin
 
+from fuo_kuwo.provider import provider
+
 
 async def render(req, **kwargs):
     app = req.ctx['app']
-    provider = app.library.get('kuwo')
 
-    playlists = await aio.run_fn(provider._user.get_rec_playlists)
+    playlists = await aio.run_fn(provider.current_user_rec_playlists)
     view = ExploreView()
     # view.daily_rec_btn.clicked.connect(
     #     lambda: app.browser.goto(page='/providers/kuwo/daily_recommendation'))
