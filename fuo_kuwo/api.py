@@ -1,7 +1,7 @@
 import logging
-
 import time
 from pathlib import Path
+from hashlib import md5
 
 import requests
 from requests.cookies import RequestsCookieJar
@@ -67,20 +67,13 @@ class KuwoApi(object, metaclass=Singleton):
             'Host': 'kuwo.cn',
         }
         self.mobi_headers = {'User-Agent': 'okhttp/3.10.0'}
-        self.get_cookie_token()
-        self.headers['csrf'] = self.token
+        random_str = '123456789'
+        self.headers['csrf'] = random_str
+        self.cookie = {'kw_token': random_str, 'Hm_token': random_str}
+        self.headers['Cross'] = md5(random_str.encode('utf-8')).hexdigest()
         self._userid = ''
         self._sid = ''
         self._cookies = {}
-
-    def get_cookie_token(self):
-        """get kuwo token & set cookie jar"""
-        token_uri = KuwoApi.HTTP_HOST + '/search/list?key=hello'
-        with requests.Session() as session:
-            response = session.get(token_uri, headers=self.headers)
-            token = response.cookies.get('kw_token')
-            self.token = token
-            self.cookie = response.cookies
 
     def set_cookies(self, cookies):
         if cookies:
