@@ -23,6 +23,10 @@ test_kuwo_api.py -- Kuwo API tests
 
 ## Changelog
 
+### v0.2.0 (2023-07-13)
+* 修复 API 不可用的问题
+* 适配 feeluown v2 model，废弃 v1 models
+
 ### v0.1.6 (2022-06-08)
 * 修复获取歌曲/mv播放链接有一定概率会失败的问题
 
