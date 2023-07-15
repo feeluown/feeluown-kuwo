@@ -23,6 +23,9 @@ test_kuwo_api.py -- Kuwo API tests
 
 ## Changelog
 
+### v0.2.1 (2023-07-15)
+* 修复 API 不可用的问题
+
 ### v0.2.0 (2023-07-13)
 * 修复 API 不可用的问题
 * 适配 feeluown v2 model，废弃 v1 models

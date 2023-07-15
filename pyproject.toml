@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fuo_kuwo"
-version = "0.2.0"
+version = "0.2.1"
 description = "Kuwo music provider for FeelUOwn music player"
 authors = ["feeluown team"]
 readme = "README.md"
