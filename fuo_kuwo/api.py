@@ -1,7 +1,7 @@
 import logging
 import time
 from pathlib import Path
-from hashlib import md5
+from hashlib import md5, sha1
 
 import requests
 from requests.cookies import RequestsCookieJar
@@ -69,8 +69,9 @@ class KuwoApi(object, metaclass=Singleton):
         self.mobi_headers = {'User-Agent': 'okhttp/3.10.0'}
         random_str = '123456789'
         self.headers['csrf'] = random_str
-        self.cookie = {'kw_token': random_str, 'Hm_token': random_str}
-        self.headers['Cross'] = md5(random_str.encode('utf-8')).hexdigest()
+        self.cookie = {'Hm_token': random_str}
+        self.headers['Cross'] = md5(bytes(
+            sha1(random_str.encode('utf-8')).hexdigest(), 'utf-8')).hexdigest()
         self._userid = ''
         self._sid = ''
         self._cookies = {}
