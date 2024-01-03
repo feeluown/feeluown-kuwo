@@ -2,7 +2,7 @@
 from setuptools import setup
 
 packages = \
-['fuo_kuwo', 'fuo_kuwo.enc', 'fuo_kuwo.pages']
+['fuo_kuwo', 'fuo_kuwo.enc']
 
 package_data = \
 {'': ['*'], 'fuo_kuwo': ['assets/*']}

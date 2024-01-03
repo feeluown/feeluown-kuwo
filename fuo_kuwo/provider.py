@@ -39,6 +39,10 @@ class KuwoProvider(
 ):
     api: KuwoApi
 
+    class meta:
+        identifier: str = __identifier__
+        name: str = __alias__
+
     def __init__(self):
         super().__init__()
         self.api = KuwoApi()
@@ -72,7 +76,7 @@ class KuwoProvider(
         return [_deserialize(data_playlist, KuwoUserPlaylistSchema)
                 for data_playlist in data_playlists]
 
-    def current_user_rec_playlists(self):
+    def rec_list_daily_playlists(self):
         data_playlists = self.api.playlist_recommend(20, 1)
         return [_deserialize(data_playlist, KuwoPlaylistSchema)
                 for data_playlist in data_playlists.get('data', {}).get('list', [])]

@@ -8,16 +8,16 @@ __identifier__ = 'kuwo'
 from feeluown.app import App
 
 from .provider import provider
-from .ui import KuwoUiManager
-
-ui_mgr = None
 
 
 def enable(app: App):
     global ui_mgr
     app.library.register(provider)
     if app.mode & App.GuiMode:
-        ui_mgr = ui_mgr or KuwoUiManager(app)
+        from .ui import ProviderUi
+
+        provider_ui = ProviderUi(app)
+        app.pvd_ui_mgr.register(provider_ui)
 
 
 def disable(app: App):
