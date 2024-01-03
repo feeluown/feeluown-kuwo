@@ -15,7 +15,7 @@ entry_points = \
 
 setup_kwargs = {
     'name': 'fuo-kuwo',
-    'version': '0.2.1',
+    'version': '0.2.2',
     'description': 'Kuwo music provider for FeelUOwn music player',
     'author': 'feeluown team',
     'url': 'https://github.com/feeluown/feeluown-kuwo',
@@ -28,4 +28,3 @@ setup_kwargs = {
 
 
 setup(**setup_kwargs)
-

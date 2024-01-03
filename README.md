@@ -23,6 +23,10 @@ test_kuwo_api.py -- Kuwo API tests
 
 ## Changelog
 
+### v0.2.2 (2024-01-04)
+* 适配 FeelUOwn 最新代码（兼容 v3.8.15 及以上）
+* API 仍然不可用
+
 ### v0.2.1 (2023-07-15)
 * 修复 API 不可用的问题
 
